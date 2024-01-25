@@ -1,0 +1,2342 @@
+﻿@model WO.Models.WODtoORA;
+@using Kendo.Mvc.UI;
+@addTagHelper *, Kendo.Mvc
+@using Kendo.Mvc.TagHelpers;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "XNK Form P-HT-006/F5b";
+}
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+@*<link rel="stylesheet" href="/styles/kendo.moonlight.min.css">*@
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/kendo.web.min.js"></script>
+<script src="~/js/kendo.aspnetmvc.min.js"></script>
+<script src="~/js/kendo.all.min.js"></script>
+<link href="~/css/mdb-pro.css" rel="stylesheet" />
+<link rel="stylesheet" href="/styles/kendo.default-ocean-blue.min.css" />
+@*<link rel="stylesheet" href="/styles/kendo.common.min.css"/>*@
+<script src="~/js/kendo.all.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>
+<style type="text/css">
+    .styleIcon {
+        margin-left: -25px;
+        margin-top: 3px;
+        position: fixed;
+    }
+
+    .riTextBox[type="text"] {
+        padding-right: 23px !important;
+    }
+
+    .assetTitle {
+        font-size: 1.25em;
+        line-height: 1.5em;
+        text-overflow: ellipsis;
+        height: 1.5em;
+        white-space: nowrap;
+        margin-left: 5px;
+        overflow: hidden;
+        font-weight: normal;
+        font-family: serif;
+    }
+
+    .k-grid-footer {
+        display: none !important;
+    }
+
+    .assetDetail {
+        font-size: 1.15em;
+        line-height: 1.25em;
+        text-overflow: ellipsis;
+        height: 1.25em;
+        white-space: nowrap;
+        margin-left: 5px;
+        overflow: hidden;
+        font-weight: normal;
+        font-family: serif;
+    }
+
+    .rlbTemplate {
+        border-bottom-width: 1px !important;
+        border-style: solid;
+        border-width: 0px;
+        border-color: #d8d8d8;
+    }
+
+    #RAD_SPLITTER_PANE_CONTENT_ctl00_contentPane {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    .RadGrid {
+        width: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_ToolBarAsset_i0_lblAssetNamePanel {
+        display: contents !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetPMSchedulePanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetPMSchedule_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetPartUsagePanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetPartUsage_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetPartAssociatedPanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetPartAssociated_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetDepreciationPanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetDepreciation_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetEventPanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetEvent_GridData {
+        height: 100% !important;
+    }
+
+    .rgHeader {
+        border-right: 1px solid #d8d8d8;
+        color: white !important;
+        font: bold 12px/18px helvetica, arial, verdana, sans-serif;
+        outline: 0;
+        background-image: none;
+        background-color: #50535a;
+    }
+
+    .rtsTxt {
+        font: bold 12px/18px helvetica, arial, verdana, sans-serif;
+    }
+
+    .accordion dt a {
+        line-height: 1.2;
+        margin: 0.5em auto 0.6em;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        display: block;
+    }
+
+    .accordion dt span {
+        color: #085B8F;
+        font-size: 1.15em;
+        line-height: 1.2;
+        margin: 0.5em auto 0.6em;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        display: block;
+        font-weight: bold;
+        font-family: serif;
+    }
+
+    #RAD_SPLITTER_PANE_CONTENT_ctl00_ContentPlaceHolder2_Radpane1 {
+        display: flex !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_txtSearch {
+        height: 27px !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdWO_GridData {
+        height: 60vh !important;
+    }
+
+    .rnContent {
+        font-size: 13px;
+    }
+
+    .RadTextBox_NoBorder {
+        border: none !important;
+        background-color: #fff !important;
+        font-family: times !important;
+        font-size: 12pt !important;
+    }
+
+    .radpane2detail {
+        overflow: hidden !important;
+    }
+
+    .AutoHeight {
+        height: auto !important;
+        overflow: auto;
+    }
+    /*   .rgCommandTable{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    d    isplay:none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }    */
+    .rgHeader {
+        font-family: times;
+        font-size: 12pt;
+        height: 35px;
+    }
+
+    .rgMasterTable {
+        font-family: times !important;
+        font-size: 12pt !important;
+    }
+
+    .txtblack {
+        border: none;
+        border-bottom: 1px dotted;
+    }
+
+        .txtblack:focus-visible {
+            border: none;
+        }
+
+    .rgAltRow {
+        background-color: #fff !important;
+    }
+
+    .RadGrid_Metro .rgSelectedRow > td {
+        background-color: #25a0da !important;
+    }
+
+    .RadGrid_Metro .rgRow > td, .RadGrid_Metro .rgAltRow > td, .RadGrid_Metro .rgEditRow > td {
+        border-width: 2px !important;
+    }
+
+    .hasDatepicker {
+        text-align: center;
+    }
+
+    .centerText {
+        text-align: center;
+    }
+
+    .btnSaveTrangThai {
+        color: lightgray !important;
+        cursor: pointer;
+        margin: 20px 10px;
+        width: 20%;
+        height: 40px;
+        background-color: gray !important;
+    }
+
+        .btnSaveTrangThai:hover {
+            background-color: lightgray !important;
+            color: dimgrey !important;
+        }
+
+    .centerbtn {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .RadButton_Silk {
+        color: white !important;
+        font-size: 12pt;
+    }
+
+        .RadButton_Silk:hover {
+        }
+
+    .rdSP2 {
+        height: max-content !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    .rspPaneHorizontal {
+        border: none !important;
+    }
+
+    .rdSP2 table {
+        height: max-content !important;
+        width: 100% !important;
+        position: relative !important;
+        table-layout: fixed;
+    }
+
+    td {
+        font-size: 13pt !important; /* Đặt kích thước font cho toàn bộ trang */
+    }
+
+    .rcbActionButton {
+        display: none !important;
+    }
+
+    .rgCommandCell {
+        background: #50535a !important;
+    }
+
+    .rcbInner {
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .rcbInput {
+        text-align: center;
+    }
+
+    .RadGrid_Metro .rgCommandRow a {
+        color: white !important;
+    }
+
+    .rgCommandCell {
+        font-family: times !important;
+        font-size: 12pt !important;
+        background: #50535a;
+        color: white !important;
+    }
+
+    .modal {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 5px;
+        background: white;
+    }
+
+    .message {
+        font-size: 13px;
+        margin-bottom: 1.6rem;
+        margin-top: 0;
+    }
+
+    .btn {
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        background: white;
+        padding: 0.3rem 3.4rem;
+        border: 3px solid black;
+        margin-right: 2.6rem;
+        box-shadow: 0 0 0 black;
+        transition: all 0.2s;
+    }
+
+        .btn:last-child {
+            margin: 0;
+        }
+
+        .btn:hover {
+            box-shadow: 0.4rem 0.4rem 0 black;
+            transform: translate(-0.4rem, -0.4rem);
+        }
+
+        .btn:active {
+            box-shadow: 0 0 0 black;
+            transform: translate(0, 0);
+        }
+
+    .options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #scrollButton {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .scroll-section {
+        height: 100vh;
+        background-color: #c0c0c0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    #scrolldown {
+        position: fixed;
+        top: 80%;
+        left: 97%;
+        width: 46px;
+        height: 46px;
+        margin-left: -23px;
+        border: 1px solid #fff;
+        border-radius: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+    }
+
+        #scrolldown:hover {
+            border: 1px solid gray;
+            background-color: white;
+        }
+
+            #scrolldown:hover::after {
+                border-left: 1px solid gray;
+                border-bottom: 1px solid gray;
+            }
+
+        #scrolldown::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            content: '';
+            width: 16px;
+            height: 16px;
+            margin: -12px 0 0 -8px;
+            border-left: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            box-sizing: border-box;
+        }
+
+    .displaynone {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 95% !important;
+        width: 92% !important;
+    }
+
+    .notifications {
+        width: 300px;
+        overflow: scroll;
+        height: 0;
+        opacity: 0;
+        position: absolute;
+        top: 40px;
+        right: 62px;
+        border-radius: 5px 0px 5px 5px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    }
+
+        .notifications h2 {
+            font-size: 14px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            color: #999
+        }
+
+            .notifications h2 span {
+                color: #f00
+            }
+
+    .notifications-item {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        padding: 6px 9px;
+        margin-bottom: 0px;
+        cursor: pointer
+    }
+
+        .notifications-item:hover {
+            background-color: #eee
+        }
+
+        .notifications-item img {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            margin-top: 2px
+        }
+
+    .k-grid-header {
+        background-color: #757575 !important;
+        color: white !important;
+        vertical-align:middle;
+    }
+    .k-grid-header table th{
+            vertical-align: middle !important;
+    }
+        .notifications-item .text h4 {
+            color: #777;
+            font-size: 16px;
+            margin-top: 3px
+        }
+
+        .notifications-item .text p {
+            color: #aaa;
+            font-size: 12px
+        }
+
+    #toasts {
+        position: fixed;
+        bottom: 30px;
+        right: 32px;
+        z-index: 999999;
+    }
+
+    body {
+        overflow: hidden !important;
+    }
+
+    .toast__close {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+    }
+
+    .toasts {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 2px;
+        padding: 10px 0;
+        max-width: 450px;
+        border-left: 4px solid;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+        transition: all linear 0.3s;
+    }
+
+        .toasts + .toasts {
+            margin-top: 24px;
+        }
+
+    table th span {
+        justify-content: center !important;
+    }
+
+
+
+    #grdData .k-combobox button {
+        display: initial !important;
+    }
+
+    .k-combobox .k-clear-value {
+        display: none;
+    }
+
+    .k-column-title {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* .k-grid-header {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        background-color: #757575 !important;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        color: white !important;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }*/
+
+    .k-grid-content.k-auto-scrollable {
+        overflow: hidden !important;
+    }
+
+    .k-checkbox-item {
+        width: max-content !important;
+    }
+
+    .k-checkbox-list {
+        align-items: center;
+    }
+
+    .k-grid-header {
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+    }
+
+
+    #cbGroupDat {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .k-checkbox-list-horizontal, .k-checkbox-list.k-list-horizontal {
+        margin-right: -100px !important;
+    }
+
+    input[type="checkbox"] {
+        /* Kiểu kiểu của checkbox khi nó được kích hoạt */
+        background-color: #fff !important; /* Màu nền */
+        border: 1px solid #ccc !important; /* Viền */
+        padding: 5px !important; /* Khoảng cách bên trong */
+        cursor: pointer !important; /* Con trỏ khi rê chuột vào */
+    }
+        /* Style cho checkbox khi bị vô hiệu hóa */
+        input[type="checkbox"]:disabled {
+            background-color: #eee !important; /* Màu nền khi bị vô hiệu hóa */
+            border: 1px solid #ccc !important; /* Viền */
+            padding: 5px !important; /* Khoảng cách bên trong */
+            cursor: not-allowed !important; /* Con trỏ không cho phép khi rê chuột vào */
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #aaf !important; /* Change to your desired color for checked state */
+        }
+     
+</style>
+<div class="text-center" id="content" style="height:100%;position:absolute;overflow-y:scroll;width:100%; font-family:times !important">
+    <div style="width: 100%; height: auto; background-color: gray">
+        <div class="container" style="background:#fff;padding-left:0px;padding-right:0px">
+            <div id="MainSplitter" class="rdSP2">
+                <div id="Radpane2" class="AutoHeight rdSP2" style="text-align:left;padding-left:15px;padding-right:15px">
+                    <table style="margin-top:20px">
+                        <tr>
+                            <td style="width:25%;font-size: 17px;text-align:center">
+                                <u>XÍ NGHIỆP KHÍ</u>
+                            </td>
+                            <td style="width:75%">
+                                <div style="color: black; font-size: 17px; text-align: right; font-family: serif;">
+                                    No: PHT-006/F5b</br>LBH: 09-HL:22/09/2021
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="border:1px solid black;width:100%;margin-bottom:20px">
+                        <tr>
+                            <td style="width:25%;border:2px solid black;text-align:center">
+                                <img src="/images/THEA_Logo_vn_Backup.png" style="width:200px;height:150px" />
+                            </td>
+                            <td style="width:50%;border:2px solid black;text-align:center;font-weight:bold">
+                                PHIẾU BẢO DƯỠNG VÀ NGHIỆM THU<br /> HỆ THỐNG ĐIỆN <br />КАРТА ППР И ПРИЕМА ОБОРУДОВАИИЯ<br />ЭЛЕКТРИКЧЕСКИЙ СИСТЕМ
+                            </td>
+                            <td style="width:25%;border:2px solid black;">
+
+                                <table>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Giàn / Объект: <kendo-textbox name="txtGian" class="RadTextBox_NoBorder" readonly="true" style="width:100px" value="@Model.gian">
+                                            </kendo-textbox>
+                      
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Số / НОМЕР: <kendo-textbox name="txtSo" class="RadTextBox_NoBorder" readonly="true" style="width:100px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Ngày / Дата: <kendo-textbox name="txNgay" class="RadTextBox_NoBorder" readonly="true" style="width:100px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Page: <kendo-textbox name="txPage" class="RadTextBox_NoBorder" readonly="true" style="width:100px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3">
+                                <table style="margin-left:10px">
+                                    <tr style="margin:10px">
+                                        <td align="left" style="width: 40%; padding-right: 10px;font-size:13px;font-weight:bold">
+                                            Tên hệ thống: <span style="font-weight:normal">@Model.tentbi</span>
+                                            @*<kendo-textbox name="txTenHT" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.tentbi">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Ký mã hiệu: <span style="font-weight:normal">@Model.matbi</span>
+                                            @* <kendo-textbox name="txKMH" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.matbi">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Vị trí lắp đạt: <span style="font-weight:normal">@Model.ViTriLapDat</span>
+                                            @* <kendo-textbox name="txVTLD" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.ViTriLapDat">
+                                            </kendo-textbox>*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 40%; padding-right: 10px;font-size:13px;font-weight:bold">
+                                            Наим.сист.
+                                            @*<kendo-textbox name="txTenHT" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.tentbi">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Тип,марка
+                                            @* <kendo-textbox name="txKMH" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.matbi">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Место установки
+                                            @* <kendo-textbox name="txVTLD" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.ViTriLapDat">
+                                            </kendo-textbox>*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 40%; padding-right: 10px;font-size:13px;font-weight:bold">
+                                            Dạng bảo dưỡng: <span style="font-weight:normal">@Model.CapBD</span>
+                                            @* <kendo-textbox name="txDangBaoDuong" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.CapBD">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Theo hướng dẫn số: <span style="font-weight:normal">@Model.MaBD</span>
+                                            @*  <kendo-textbox name="txTHDS" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.MaBD">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Mã bão dưỡng: <span style="font-weight:normal">@Model.MaBD</span>
+                                            @*<kendo-textbox name="txMaBaoDuong" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.MaBD">
+                                            </kendo-textbox>*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 40%; padding-right: 10px;font-size:13px;font-weight:bold">
+                                            Вид ППР
+                                            @*<kendo-textbox name="txTenHT" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.tentbi">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            По инструкции №
+                                            @* <kendo-textbox name="txKMH" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.matbi">
+                                            </kendo-textbox>*@
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;font-weight:bold;padding-left:10px">
+                                            Коде ТО
+                                            @* <kendo-textbox name="txVTLD" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.ViTriLapDat">
+                                            </kendo-textbox>*@
+                                        </td>
+                                    </tr>
+                                  
+                                </table>
+                            </td>
+                        </tr>
+                          <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                                        <td colspan="3" style="background-color:#b0cbdb">
+                                            <span style="padding-left:10px; font-weight:bold">1. Cho phép đưa hệ thống vào bảo dưỡng / Разрешение ввода в ППР</span>
+                                        </td>
+                                    </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3">
+                                <table>
+                                    <tr>
+                                        <td align="left" style="width: 40%; padding-right: 10px;font-size:13px;padding-left:10px">
+                                            Người cho phép: <kendo-combobox name="txNguoiChoPhep" class="RadTextBox_NoBorder" style="width:300px" value="@Model.NguoiChoPhep" filter="FilterType.Contains" datatextfield="per_desc"
+                                                                            datavaluefield="per_code" on-change="nguoichophep_savechange">
+                                                <datasource>
+                                                    <transport>
+                                                        <read url="@Url.Action("GetPersonList", "ELEForm")" />
+                                                    </transport>
+                                                </datasource>
+                                            </kendo-combobox>
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;padding-left:10px">
+                                            Chức danh: <kendo-textbox name="txChucDanh" class="RadTextBox_NoBorder" readonly="true" style="width:300px" value="@Model.ChucDanh">
+                                            </kendo-textbox>
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;padding-left:10px">
+                                            Ký tên: <kendo-textbox name="txKyTen" class="RadTextBox_NoBorder" readonly="true" style="width:300px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 40%; padding-right: 10px;font-size:13px;padding-left:10px">
+                                            Лицо, даіощее разрешение
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;padding-left:10px">
+                                            Должность 
+                                        </td>
+                                        <td align="left" style="width: 30%; padding-right: 10px;font-size:13px;padding-left:10px">
+                                            Подпись
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                                        <td colspan="3" style="background-color:#b0cbdb">
+                                            <span style="padding-left:10px; font-weight:bold">2. Danh mục thiết bị chuẩn sử dụng cho việc bảo dưỡng/ Используемое оборудование и приборы </span>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                                        <td colspan="3">
+                                            <kendo-grid name="grdTool" navigatable="true" id="grdTool" on-save-changes="saveChangeTool" on-edit="grdTool_edit">
+                                                <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                            server-operation="false"
+                                                            batch="true">
+                                                    <schema>
+                                                        <model id="idRow">
+                                                            <fields>
+                                                                <field name="Ma_Tool" type="string" editable="true"></field>
+                                                                <field name="Ma_Ky_Hieu" type="string" editable="true"></field>
+                                                                <field name="So_Seri" type="string" editable="true"></field>
+                                                                <field name="Nha_SX" type="string" editable="true"></field>
+                                                                <field name="Hang_Kiem_Dinh" type="string" editable="true"></field>
+                                                                <field name="status" type="number" editable="true"></field>
+
+                                                                <field name="idRow" type="number" editable="false"></field>
+                                                            </fields>
+                                                        </model>
+                                                    </schema>
+                                                    <aggregates>
+                                                        <aggregate field="TotalSales" aggregate="sum" />
+                                                    </aggregates>
+                                                    <transport>
+                                                        <read url="@Url.Action("getDataTool","ELEForm")" />
+                                                        @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                                        <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                                        <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                                    </transport>
+                                                </datasource>
+                                                <columns>
+                                                    @* <column width="75" selectable="true"
+                                                    header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                                    html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+
+                                                    <column field="Ten_TB" title="Tên thiết bị</br>Наименованне" width="280" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' editor="tenTBTemplate" />
+                                                    <column field="Ma_Ky_Hieu" title="Ký mã hiệu</br>Тип, моделъ" width="280" />
+
+                                                    <column field="So_Seri" title="Số sê-ri</br>Заводской иомер" width="120" />
+                                                    <column field="Nha_SX" title="Nhà sản xuất</br>Производитель" width="100" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                                    <column field="Hang_Kiem_Dinh" title="Hạn kiểm định</br>Дата поверки" width="150" />
+                                                    <column title="Đã sử dụng </br> đ/hồ đo" width="65" template=" <input type='checkbox' checked='checked'/>" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                                    <column width="30" template="#=DeleteTemplate(data.idRow,'grdTool.id')#" html-attributes='new Dictionary<string, object>{ ["style"] = "padding:inherit;" }' />
+                                                    @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                                    group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                                    @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                                    template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                                    editor="clientCountryEditor" />*@
+                                                    @*<column field="UnitsInStock" title="Units" width="105" />
+                                                    <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                                    <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                                    template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                                </columns>
+                                                <toolbar>
+                                                    <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                                    <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                                    <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                                                </toolbar>
+                                                <editable enabled="true" />
+                                                <sortable enabled="true" />
+                                                <reorderable enabled="true" />
+                                                <scrollable enabled="true" />
+                                            </kendo-grid>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                                        <td colspan="3" style="background-color:#b0cbdb">
+                                            <span style="padding-left:10px; font-weight:bold">3. Bảo dưỡng hệ thống và thiết bị/ Содержание ППР</span>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                                        <td colspan="3">
+
+                                            <kendo-grid name="grdData" navigatable="true" id="grdData" on-save-changes="grddata_SaveChange" on-edit="grdData_edit">
+                                                <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                            server-operation="false"
+                                                            batch="true">
+                                                    <schema>
+                                                        <model id="idRow">
+                                                            <fields>
+                                                                <field name="MaCV" type="string" editable="false"></field>
+                                                                <field name="hangmuccv" type="string" editable="true"></field>
+                                                                <field name="ngaythuchien" type="string" editable="true"></field>
+                                                                <field name="trangthai" type="string" editable="true"></field>
+                                                                <field name="ghichu" type="string" editable="true"></field>
+                                                                <field name="ACT_ACT" type="string" editable="true"></field>
+                                                                <field name="ACT_EVENT" type="string" editable="true"></field>
+                                                                <field name="isnew" type="number" editable="true"></field>
+                                                                <field name="matlist" type="string" editable="true"></field>
+                                                                <field name="thoigian" type="number" editable="true"></field>
+                                                                <field name="status" type="number" editable="true"></field>
+                                                                <field name="nhanluc" type="number" editable="true"></field>
+                                                                <field name="idRow" type="number" editable="false"></field>
+                                                            </fields>
+                                                        </model>
+                                                    </schema>
+                                                    <aggregates>
+                                                        <aggregate field="TotalSales" aggregate="sum" />
+                                                    </aggregates>
+                                                    <transport>
+                                                        <read url="@Url.Action("GetTableData","ELEForm")" />
+                                                        @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                                        <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                                        <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                                    </transport>
+                                                </datasource>
+                                                <columns>
+                                                    @* <column width="75" selectable="true"
+                                                    header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                                    html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+
+                                                    <column field="MaCV" title="Mã công việc</br>Код рaбom" width="170" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center; font-family: bold;" }' />
+                                                    <column field="hangmuccv" title="Hạng mục công việc</br>Описание рaбom" width="320" />
+
+                                                    <column title="Kết quả thực hiện công việc</br>Результат ВьІполнсния">
+                                                        <columns>
+                                                            <column field="trangthai" title="Đạt</br>Удов." width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center; font-family: bold;" }' editor="customBooleanEditorDat" template="# if (data.trangthai=='DAT') { # <input type='checkbox' checked='checked'/> # } else { # <input type='checkbox' /> # } #" />
+                                                            <column field="trangthai" title="Không<br/>đạt/He" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center; font-family: bold;" }' editor="customBooleanEditorKoDat" template="# if (data.trangthai=='KD') { # <input type='checkbox' checked='checked'/> # } else { # <input type='checkbox'/> # } #" />
+                                                            <column field="trangthai" title="Không</br>làm/He" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center; font-family: bold;" }' editor="customBooleanEditorKoLam" template="# if (data.trangthai !='DAT' && data.trangthai != 'KD') { # <input type='checkbox' checked='checked'/> # } else { # <input type='checkbox'/> # } #" />
+                                                        </columns>
+                                                    </column>
+                                                    <column field="ghichu" title="Ghi chú</br>Примечание" width="150" />
+                                                    <column width="30" template="#=DeleteTemplate(idRow,'grdData.id')#" html-attributes='new Dictionary<string, object>{ ["style"] = "padding:inherit; font-family: bold;" }' />
+                                                    @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                                    group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                                    @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                                    template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                                    editor="clientCountryEditor" />*@
+                                                    @*<column field="UnitsInStock" title="Units" width="105" />
+                                                    <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                                    <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                                    template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                                </columns>
+                                                <toolbar>
+                                                    <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                                    <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                                    <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                                                </toolbar>
+                                                <editable enabled="true" />
+                                                <sortable enabled="true" />
+                                                <reorderable enabled="true" />
+                                                <scrollable enabled="true" />
+                                            </kendo-grid>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="height: 40px; border-width: 0; background-color: gray;"></div>
+            <div id="MainSplitter" class="rdSP2">
+                <div id="Radpane2" class="AutoHeight rdSP2" style="text-align:left;padding-left:15px;padding-right:15px">
+                    <table style="margin-top:20px">
+                        <tr>
+                            <td style="width:25%;font-size: 17px;text-align:center">
+                                <u>XÍ NGHIỆP KHÍ</u>
+                            </td>
+                            <td style="width:75%">
+                                <div style="color: black; font-size: 17px; text-align: right; font-family: serif;">
+                                    No: PHT-006/F5b</br>LBH: 09-HL:22/09/2021
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="border:1px solid black;width:100%">
+                        <tr>
+                            <td style="width:25%;border:2px solid black;text-align:center">
+                                <img src="/images/THEA_Logo_vn_Backup.png" style="width:200px;height:150px" />
+                            </td>
+                            <td style="width:50%;border:2px solid black;text-align:center;font-weight:bold">
+                                  PHIẾU BẢO DƯỠNG VÀ NGHIỆM THU<br /> HỆ THỐNG ĐIỆN <br />КАРТА ППР И ПРИЕМА ОБОРУДОВАИИЯ<br />ЭЛЕКТРИКЧЕСКИЙ СИСТЕМ
+                            </td>
+                            <td style="width:25%;border:2px solid black;">
+                                <table>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Giàn / Объект: <kendo-textbox name="txtGian" class="RadTextBox_NoBorder" readonly="true" style="width:100px" value="@Model.gian">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Số / НОМЕР: <kendo-textbox name="txtSo" class="RadTextBox_NoBorder" readonly="true" style="width:100px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Ngày / Дата: <kendo-textbox name="txNgay" class="RadTextBox_NoBorder" readonly="true" style="width:100px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 170px; padding-right: 2px;font-size:13px;font-weight:bold">
+                                            Page: <kendo-textbox name="txPage" class="RadTextBox_NoBorder" readonly="true" style="width:100px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3" style="background-color:#b0cbdb">
+                                <span style="padding-left:10px; font-weight:bold">4. Kết quả kiểm tra trạng thái làm việc của các thiết bị/ Результаты приборов</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3">
+                                <kendo-grid name="grdData1" navigatable="true" id="grdData1">
+                                    <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                server-operation="false"
+                                                batch="true">
+                                        <schema>
+                                            <model id="idRow">
+                                                <fields>
+                                                    <field name="MaCV" type="string" editable="false"></field>
+                                                    <field name="hangmuccv" type="string" editable="true"></field>
+                                                    <field name="ngaythuchien" type="date" editable="true"></field>
+                                                    <field name="trangthai" type="string" editable="true"></field>
+                                                    <field name="ghichu" type="string" editable="true"></field>
+                                                    <field name="ACT_ACT" type="string" editable="true"></field>
+                                                    <field name="ACT_EVENT" type="string" editable="true"></field>
+                                                    <field name="isnew" type="number" editable="true"></field>
+                                                    <field name="matlist" type="string" editable="true"></field>
+                                                    <field name="thoigian" type="number" editable="true"></field>
+                                                    <field name="status" type="number" editable="true"></field>
+                                                    <field name="nhanluc" type="number" editable="true"></field>
+                                                    <field name="idRow" type="number" editable="false"></field>
+                                                </fields>
+                                            </model>
+                                        </schema>
+                                        <aggregates>
+                                            <aggregate field="TotalSales" aggregate="sum" />
+                                        </aggregates>
+                                        <transport>
+
+                                            @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                            <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                            <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                        </transport>
+                                    </datasource>
+                                    <columns>
+                                        @* <column width="75" selectable="true"
+                                        header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                        html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+
+                                        <column title="Tagname" width="170" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Insulation Check" width="320" />
+
+
+                                        <column title="Switch" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Tighten" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Grounding" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Cleaning" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Note" width="150" />
+                                        <column width="30" template="#=DeleteTemplate(idRow)#" html-attributes='new Dictionary<string, object>{ ["style"] = "padding:inherit;" }' />
+                                        @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                        group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                        @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                        template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                        editor="clientCountryEditor" />*@
+                                        @*<column field="UnitsInStock" title="Units" width="105" />
+                                        <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                        <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                        template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                    </columns>
+                                    <toolbar>
+                                        <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                        <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                        <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+
+                                    </toolbar>
+                                    <editable enabled="true" />
+                                    <sortable enabled="true" />
+                                    <reorderable enabled="true" />
+                                    <scrollable enabled="true" />
+                                </kendo-grid>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3" style="background-color:#b0cbdb">
+                                <span style="padding-left:10px; font-weight: bold">5. Kiểm tra sau khi bảo dưỡng/ Проверка состояния после ППР</span>
+                            </td>
+
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3">
+                                <div style="margin:10px">
+                                    <kendo-checkbox name="Cb_Check"
+                                                    label="Kiểm tra sự hoàn chỉnh của toàn bộ hệ thống/ Осмотр оборудования после ППР" class="custom-control custom-checkbox" id="Cb_Status">
+                                    </kendo-checkbox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3" style="background-color:#b0cbdb">
+                                <span style="padding-left:10px; font-weight: bold">6. Tình trạng thiết bị sau bảo dưỡng/ Состояние оборудования после ППР</span>
+                            </td>
+                        </tr>
+                        <tr style="border-top:1px;border-style:solid">
+                            <td style="width:33%;text-align:center">
+                                <div style="margin-left:10px">
+                                    <table style="width:max-content !important">
+                                        <tr>
+                                            <td style="width:max-content !important;vertical-align:text-top">
+                                    <kendo-checkbox name="Cb_Status1" label=""
+                                                     class="custom-control custom-checkbox" id="Cb_Status1" checked="@(Model.TinhTrangThietBi=="TOT")" on-change="saveChangeStatus" value="1">
+
+                                    </kendo-checkbox>
+                                    </td>
+                                            <td style="width:max-content !important;vertical-align:text-top;text-align:left">
+                                                Tốt, sẵn sàng hoạt động<br />Исправно, допускается к работе
+                                        </td>
+                                    </tr>
+                                    </table>
+                                </div>
+                            </td>
+                            <td style="width:33%;text-align:center">
+                                <div style="margin-left:10px;display:flex;align-items:center">
+                                    <table style="width:max-content !important;position:absolute !important;left:40%">
+                                        <tr>
+                                            <td style="width:max-content !important;vertical-align:text-top">
+                                                <kendo-checkbox name="Cb_Status2" label=""
+                                                                 class="custom-control custom-checkbox" id="Cb_Status2" checked="@(Model.TinhTrangThietBi=="TT")" on-change="saveChangeStatus" value="2">
+
+                                                </kendo-checkbox>
+                                            </td>
+                                            <td style="width:max-content !important;vertical-align:text-top;text-align:left">
+                                                Có thể hoạt động tạm thời<br />Исправно не в полн.обьеме, допуск к раб
+                                            </td>
+                                        </tr>
+                                    </table>
+                                   
+                                </div>
+                            </td>
+                            <td style="width:33%;text-align:center">
+                                <div style="margin-left:10px">
+                                    <table style="width:max-content !important">
+                                        <tr>
+                                            <td style="width:max-content !important;vertical-align:text-top">
+                                    <kendo-checkbox name="Cb_Status3" label=""
+                                                     class="custom-control custom-checkbox" id="Cb_Status3" checked="@(Model.TinhTrangThietBi=="CHD")" on-change="saveChangeStatus" value="3">
+                                    </kendo-checkbox>
+                                    </td>
+                                            <td style="width:max-content !important;vertical-align:text-top;text-align:left">
+                                                Cần sữa chữa, cấm hoạt động<br />Треб. ремонт, запрещено работать
+                                    </td>
+                                    </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+
+                  
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3" style="background-color:#b0cbdb">
+                                <span style="padding-left:10px; font-weight: bold">7. Vật tự tiêu hao/ Израсходованные матереиалы</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <kendo-grid name="grdPart" navigatable="true" id="grdPart" on-save-changes="grdPart_SaveChange" on-edit="grdPart_edit">
+                                    <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                server-operation="false"
+                                                batch="true">
+                                        <schema>
+                                            <model id="idRow">
+                                                <fields>
+                                                    <field name="par_code" type="string" editable="true"></field>
+                                                    <field name="sto_store" type="string" editable="true"></field>
+                                                    <field name="par_desc" type="string" editable="true"></field>
+                                                    <field name="par_longdescription" type="string" editable="true"></field>
+                                                    <field name="calculated_column" type="number" editable="true"></field>
+                                                    <field name="act_matlist" type="string" editable="true"></field>
+                                                    <field name="act_act" type="string" editable="true"></field>
+                                                    <field name="act_note" type="string" editable="true"></field>
+                                                    <field name="STO_QTY" type="string" editable="true"></field>
+                                                    <field name="vitrithaythe" type="string" editable="false"></field>
+                                                    <field name="oldUsedQty" type="string" editable="true"></field>
+                                                    <field name="oldPlanedQty" type="string" editable="true"></field>
+                                                    <field name="status" type="number" editable="true"></field>
+                                                    <field name="mlp_qty" type="number" editable="true"></field>
+                                                    <field name="idRow" type="number" editable="false"></field>
+                                                </fields>
+                                            </model>
+                                        </schema>
+                                        <aggregates>
+                                            <aggregate field="TotalSales" aggregate="sum" />
+                                        </aggregates>
+                                        <transport>
+                                            <read url="@Url.Action("GetTablePart","ELEForm")" />
+                                            @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                            <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                            <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                        </transport>
+                                    </datasource>
+                                    <columns>
+                                        @* <column width="75" selectable="true"
+                                        header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                        html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+                                        <column field="idRow" title="No." width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column field="par_code" title="Mã vật tư </br> (код запчастей)" width="140" editor="partTemplate" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                           <column field="sto_store" title="Mã kho </br> (Склад)" width="120" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' editor="storeTemplate"/>
+                                        <column field="par_longdescription" title="Part number </br> (номер запчастеи)" width="120" />
+                                        <column field="par_desc" title="Tên vật tư </br> (название запчастей материалов)" width="200" />
+                                        <column title="Số lượng (к-во)">
+                                            <columns>
+                                                <column field="mlp_qty" title="Kế hoạch (план)" width="85" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                                <column field="calculated_column" title="Thực tế (факт)" width="85" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                            </columns>
+                                        </column>
+                                        <column field="vitrithaythe" title="Vị trí thay thế </br> (место установки)" width="120" />
+
+                                        @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                        group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                        @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                        template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                        editor="clientCountryEditor" />*@
+                                        @*<column field="UnitsInStock" title="Units" width="105" />
+                                        <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                        <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                        template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                    </columns>
+                                    <toolbar>
+                                        <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                        <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                        <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                                    </toolbar>
+                                    <editable enabled="true" />
+                                    <sortable enabled="true" />
+                                    <reorderable enabled="true" />
+                                    <scrollable enabled="true" />
+                                </kendo-grid>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3" style="background-color:#b0cbdb">
+                                <span style="padding-left:10px; font-weight: bold">8. Người tham gia/ Участвуіощиеся</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <kendo-grid name="grdBOO" navigatable="true" id="grdBOO" on-save-changes="grdBOO_SaveChange" on-edit="grdBOO_edit">
+                                    <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                server-operation="false"
+                                                batch="true">
+                                        <schema>
+                                            <model id="idRow">
+                                                <fields>
+                                                    <field name="MaPhieuCV" type="string" editable="true"></field>
+                                                    <field name="MaCV" type="string" editable="true"></field>
+                                                    <field name="MaNV" type="string" editable="true" ></field>
+                                                    <field name="TenNV" type="string" editable="true"></field>
+                                                    <field name="Thoigianlamviec" type="string" editable="true"></field>
+                                                    <field name="ChucDanh" type="string" editable="true"></field>
+                                                    <field name="Bac" type="string" editable="true"></field>
+
+                                                    <field name="status" type="number" editable="true"></field>
+
+                                                    <field name="idRow" type="number" editable="false"></field>
+                                                </fields>
+                                            </model>
+                                        </schema>
+                                        <aggregates>
+                                            <aggregate field="TotalSales" aggregate="sum" />
+                                        </aggregates>
+                                        <transport>
+                                            <read url="@Url.Action("getBOO","ELEForm")" />
+                                            @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                            <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                            <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                        </transport>
+                                    </datasource>
+                                    <columns>
+                                        @* <column width="75" selectable="true"
+                                        header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                        html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+                                        <column field="MaNV" title="Họ và tên" width="30" hidden="true" />
+                                        <column field="idRow" title="STT </br> №" width="50" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column field="TenNV" title="Họ và tên </br> Ф.И.О" editor="NamePersonTemplateBoo" width="140" html-attributes='new Dictionary<string, object>{ ["style"] = "font-weight:bool;" }' />
+                                        @*   <column field="sto_store" title="Mã kho </br> (Склад)" width="120" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />*@
+                                        <column field="ChucDanh" title="Chức danh</br> Подпись" width="120" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column field="Bac" title="Bậc</br> Разряд" width="80" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column field="Thoigianlamviec" title="Thời gian làm việc(h) </br> Время работы" width="100" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Ngày </br> Дата" template="#=templateNgay(Thoigianlamviec)#" width="80" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Chữ ký </br> Подпись" width="100" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column title="Ghi chú </br> Примечание" width="120" />
+
+
+                                        @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                        group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                        @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                        template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                        editor="clientCountryEditor" />*@
+                                        @*<column field="UnitsInStock" title="Units" width="105" />
+                                        <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                        <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                        template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                    </columns>
+                                    <toolbar>
+                                        <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                        <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                        <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                                    </toolbar>
+                                    <editable enabled="true" />
+                                    <sortable enabled="true" />
+                                    <reorderable enabled="true" />
+                                    <scrollable enabled="true" />
+                                </kendo-grid>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px;border-top:1px;border-style:solid">
+                            <td colspan="3" style="background-color:#b0cbdb">
+                                <span style="padding-left:10px; font-weight:bold">9. Ghi chú, đề xuất, kiến nghị/ Примечание: </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <kendo-grid name="grdTablePerson" navigatable="true" id="grdTablePerson" on-save-changes="grdTablePerson_SaveChange" on-edit="grdTablePerson_edit">
+                                    <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                server-operation="false"
+                                                batch="true">
+                                        <schema>
+                                            <model id="idRow">
+                                                <fields>
+                                                    <field name="ViTri" type="string" editable="false"></field>
+                                                    <field name="HoTen" type="string" editable="true"></field>
+                                                    <field name="ChucDanh" type="string" editable="true"></field>
+                                                    <field name="Ngay" type="date" editable="true"></field>
+                                                    <field name="MaPer" type="string" editable="true"></field>
+                                                    <field name="status" type="number" editable="true"></field>
+                                                    <field name="idRow" type="number" editable="false"></field>
+                                                </fields>
+                                            </model>
+                                        </schema>
+                                        <aggregates>
+                                            <aggregate field="TotalSales" aggregate="sum" />
+                                        </aggregates>
+                                        <transport>
+                                            <read url="@Url.Action("getTablePerson","ELEForm")" />
+                                            @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                            <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                            <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                        </transport>
+                                    </datasource>
+                                    <columns>
+                                        @* <column width="75" selectable="true"
+                                        header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                        html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+                                        <column field="MaPer" title=" " width="140" hidden="true" />
+                                        <column field="ViTri" title=" " width="140" />
+                                        @*   <column field="sto_store" title="Mã kho </br> (Склад)" width="120" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />*@
+                                        <column field="HoTen" title="Họ Tên/ Ф.И.О" width="120" html-attributes='new Dictionary<string, object>{ ["style"] = "font-weight:bool;" }' editor="NamePersonTemplate" />
+                                        <column field="ChucDanh" title="Chức danh/ Должность" width="80" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center" }' />
+                                        <column title="Chữ ký/ Подпись" width="100" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column field="Ngay" title="Ngày/ Дата" width="80" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' format="{0:dd/MM/yyyy}"/>
+                                        @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                        group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                        @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                        template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                        editor="clientCountryEditor" />*@
+                                        @*<column field="UnitsInStock" title="Units" width="105" />
+                                        <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                        <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                        template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                    </columns>
+                                    <toolbar>
+
+                                        <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                        <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                                    </toolbar>
+                                    <editable enabled="true" />
+                                    <sortable enabled="true" />
+                                    <reorderable enabled="true" />
+                                    <scrollable enabled="true" />
+                                </kendo-grid>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="centerbtn" id="section03">
+                    <div id="divError" style="display: flex;justify-content: center;text-align: center;align-items: center;">
+                        <ul style="width:max-content;font-size: 14px;color: red;" runat="server" id="liError">
+                        </ul>
+                    </div>
+
+                    <kendo-button name="btnSave"
+                                  tag="span"
+                                  theme-color="ThemeColor.Light" onclick="saveClick('@Model.gian','@Model.bophan','@Model.Org_TBi','@Model.matbi')" style="width:100px;height:40px;font-size:13px">
+                        Cập nhật
+                    </kendo-button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<a href="#section03" id="section"><span id="scrolldown"></span></a>
+<kendo-window name="winPart"
+              title="Vật tư, phụ tùng (запчасти)"
+              draggable="true"
+              resizable="true"
+              width="600"
+              id="winPart" on-close="onClose" visible="false">
+    <popup-animation enabled="false" />
+</kendo-window>
+<kendo-window name="winTool"
+              title="Thiết bị/Оборудование и приборы"
+              draggable="true"
+              resizable="true"
+              width="600"
+              id="winTool" on-close="onCloseTool" visible="false">
+    <popup-animation enabled="false" />
+</kendo-window>
+<asp:HiddenField ID="hdIdRow" runat="server" />
+<asp:HiddenField ID="tableName" runat="server" />
+<kendo-dialog name="dialog" title="Thông báo" width="400" modal="false" visible="false">
+    <content>
+        <p>Do you want to delete item ?</p>
+    </content>
+    <actions>
+        <action text="Ok" action="okClick">
+        </action>
+        <action text="Cancel" onclick="cancelClick()">
+        </action>
+
+    </actions>
+    <popup-animation>
+        <open duration="500" effects="fade:in" />
+        <close duration="500" effects="fade:out" />
+    </popup-animation>
+</kendo-dialog>
+<div id="toasts"></div>
+<script>
+    function DeleteTemplate(Id, tableName) {
+        if (Id) {
+            return kendo.format("<div style='width:100%;text-align:center'><a href='javascript:DeleteItem({0},{1})'><img src='/images/delete.png'/></a></div>", Id, tableName)
+        }
+        return "";
+    }
+
+    function customBooleanEditorKoLam(container, options) {
+        var model = options.model;  // Ensure that options is accessible in the current scope
+
+        if (model.trangthai !== "DAT" && model.trangthai !== "KD") {
+
+            $('<input type="checkbox" id="trangthaikolm" name="trangthaikolm" checked onclick="changeCheck(this, \'KL\')">')
+                .appendTo(container);
+            container.find("#trangthaikolm").checked = "checked";
+        } else {
+
+            $('<input type="checkbox" id="trangthaikolm" name="trangthaikolm" onclick="changeCheck(this, \'KL\')">')
+                .appendTo(container);
+            container.find("#trangthaikolm").checked = "unchecked";
+        }
+
+    }
+    function okClick() {
+        var idRow = document.getElementById("hdIdRow").value;
+        var tableName = document.getElementById("tableName").value;
+        console.log(tableName);
+        if (tableName === "grdData") {
+            $.ajax({
+                url: `/Home/DeleteItemData?idRow=${idRow}`,
+                cache: false,
+                type: 'POST',
+                data: {
+                    idRow: idRow,
+                },
+                success: function (data) {
+                    var grid = $("#grdData").data("kendoGrid");
+                    grid.dataSource.read();
+                }
+            });
+        } else if (tableName === "grdTool") {
+            $.ajax({
+                url: `/ELEForm/DeleteItemTool?idRow=${idRow}`,
+                cache: false,
+                type: 'POST',
+                data: {
+                    idRow: idRow,
+                },
+                success: function (data) {
+                    var grid = $("#grdTool").data("kendoGrid");
+                    grid.dataSource.read();
+                }
+            });
+        } else if (tableName === "grdBOO") {
+            $.ajax({
+                url: `/ELEForm/DeleteItemBOO?idRow=${idRow}`,
+                cache: false,
+                type: 'POST',
+                data: {
+                    idRow: idRow,
+                },
+                success: function (data) {
+                    var grid = $("#grdBOO").data("kendoGrid");
+                    grid.dataSource.read();
+                }
+            });
+        }
+
+
+    }
+    function DeleteItem(Id, name) {
+        var idRow = document.getElementById("hdIdRow");
+        var tableName = document.getElementById("tableName")
+        idRow.value = Id;
+        tableName.value = name;
+        var notification = $("#dialog").data("kendoDialog");
+        notification.open();
+        //var st = prompt("Do you want to delete item? Please Enter 'OK' to delete item");
+        //if (st == "OK") {
+        //    $.ajax({
+        //        url: `/Home/DeleteItemData?idRow=${Id}`,
+        //        cache: false,
+        //        type: 'POST',
+        //        data: {
+        //            idRow: Id,
+        //        },
+        //        success: function (data) {
+        //            var grid = $("#grdData").data("kendoGrid");
+        //            grid.dataSource.read();
+        //        }
+        //    });
+        //}
+    }
+    function customBooleanEditorDat(container, options) {
+
+        if (options.model.trangthai === "DAT") {
+
+            $('<input type="checkbox" id="trangthaidat" name="trangthaidat" checked onclick="changeCheck(this, \'DAT\')"> ')
+                .appendTo(container);
+            container.find("#trangthaidat").checked = "checked";
+        } else {
+
+            $('<input type="checkbox" id="trangthaidat" name="trangthaidat" onclick="changeCheck(this, \'DAT\')" >')
+                .appendTo(container);
+            container.find("#trangthaidat").checked = "unchecked";
+        }
+    }
+
+    function customBooleanEditorKoDat(container, options) {
+
+        if (options.model.trangthai === "KD") {
+
+            $('<input type="checkbox" id="trangthaikodat" name="trangthaikodat" checked onclick="changeCheck(this, \'KD\')">')
+                .appendTo(container);
+            container.find("#trangthaikodat").checked = "checked";
+        } else {
+
+            $('<input type="checkbox" id="trangthaikodat" name="trangthaikodat" onclick="changeCheck(this, \'KD\')" >')
+                .appendTo(container);
+            container.find("#trangthaikodat").checked = "unchecked";
+
+        }
+    }
+    function saveClick(gian, bophan, org_tbi, matb) {
+        var status1 = $("#Cb_Status1").data("kendoCheckBox");
+        var status2 = $("#Cb_Status2").data("kendoCheckBox");
+        var status3 = $("#Cb_Status3").data("kendoCheckBox");
+        var cbNguoiChoPhep = $("#txNguoiChoPhep").data("kendoComboBox");
+        var vcbNguoiChoPhep = cbNguoiChoPhep.value();
+        console.log(vcbNguoiChoPhep);
+        var tinhtrangtb = "";
+        if (status1.element[0].checked) {
+            tinhtrangtb = "TOT";
+        }
+        else if (status2.element[0].checked) {
+            tinhtrangtb = "TT";
+        }
+        else if (status3.element[0].checked) {
+            tinhtrangtb = "CHD";
+        }
+      
+        $.ajax({
+            type: "POST",
+            url: `/ELEForm/saveClick?gian=${gian}&bophan=${bophan}&org_tbi=${org_tbi}&matb=${matb}&tinhtrangthietbi=${tinhtrangtb}&nguoichophep=${vcbNguoiChoPhep}`,
+            // Don't use JSON.stringify here
+            contentType: "application/json; charset=utf-8",
+
+            success: function (response) {
+
+                if (response != "" && response != null) {
+                    //showToast(response, '/images/error-48.png', 'Thất bại');
+                    showToast('Cập nhật thành công!', '/images/complete-48.png', 'Thành công');
+                    console.log(response);
+                } else {
+                    showToast('Cập nhật thành công!', '/images/complete-48.png', 'Thành công');
+                }
+                window.location.reload();
+
+                showToast('Cập nhật thành công!', '/Images/complete-48.png', 'Thành công');
+
+            },
+            error: function (error) {
+
+                window.location.reload();
+                showToast('Cập nhật thất bại!', '/images/error-48.png', 'Thất bại');
+            }
+        });
+
+    }
+    function changeCheck(e, text) {
+        console.log(text);
+        e.checked = true;
+        var grid = $('#grdData').data('kendoGrid');
+        var model = grid.editable.options.model;
+        model.set("trangthai", text);
+        grid.refresh();
+
+    } function openPart() {
+        var windowMSR = $("#winPart").data("kendoWindow");
+        windowMSR.setOptions({
+
+            height: 500,
+            width: 850
+        });
+        windowMSR.refresh({
+            url: "/LoadPart/Index",
+            iframe: true,
+        });
+        windowMSR.center();
+        windowMSR.open();
+    }
+
+    function grddata_SaveChange(e) {
+
+        //var dataSource = e.sender.dataSource;
+        //var editedColumns = [];
+
+        //dataSource.data().forEach(function (item) {
+        //    if (item.dirty) {
+        //        editedColumns.push(item);
+        //    }
+        //});
+
+        //console.log("Edited Columns: ", editedColumns);
+        //var dataSource = e.sender.dataSource;
+        //var editedColumns = [];
+
+        //dataSource.data().forEach(function (item) {
+        //    if (item.dirty) {
+        //        console.log(item);
+        //        for (var field in item.dirtyFields) {
+        //            if (item.dirtyFields.hasOwnProperty(field)) {
+        //                // Field has been modified
+        //                editedColumns.push(field);
+        //            }
+        //        }
+        //    }
+        //});
+
+        //console.log("Edited Columns: ", editedColumns);
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+        lsObj.forEach(function (obj) {
+            obj.ngaythuchien = new Date(obj.ngaythuchien);
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+        console.log(json);
+        $.ajax({
+            url: `/ELEForm/SaveChangeData`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdData").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+    function saveChangeTool(e) {
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+        lsObj.forEach(function (obj) {
+
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+
+        $.ajax({
+            url: `/ELEForm/SaveChangeTool`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdTool").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+
+    function grdData_edit(e) {
+
+        //var dataItem = e.model;
+
+        //if (dataItem) {
+
+        //    var trangthaidat = e.container.find("[name=trangthaidat]");
+
+
+        //    if (trangthaidat) {
+
+
+        //        if (!editorPart.open()) {
+        //            editorPart.open();
+
+        //        }
+
+
+
+        //    }
+
+        //}
+    }
+    function grdPart_SaveChange(e) {
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+
+        lsObj.forEach(function (obj) {
+            obj.mlp_qty = obj.mlp_qty.toString();
+            obj.calculated_column = obj.calculated_column.toString();
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+        $.ajax({
+            url: `/Home/SaveChangePart`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdPart").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+    function grdPart_edit(e) {
+        var dataItem = e.model;
+        console.log(e);
+        if (dataItem) {
+
+            var editorPart = e.container.find("[name=par_code]");
+            var search = e.container.find(".k-i-search");
+            var parDesc = e.container.find("[name=par_desc]");
+            var editorStore = e.container.find("[name=sto_store]").data("kendoComboBox");
+            var parLongDesc = e.container.find("[name=par_longdescription]");
+            console.log(search);
+            if (search) {
+                if (e.model.isNew()) {
+
+
+
+                }
+                else {
+
+                    search.hide();
+
+                }
+            }
+            if (editorPart) {
+                //if (e.model.isNew()) {
+                //    if (!editorPart.open()) {
+                //        editorPart.enable(true);
+                //        editorPart.open();
+                //    }
+                //} else {
+                //    if (!editorPart.close()) {
+                //        editorPart.enable(false);
+                //        editorPart.close();
+                //    }
+
+                //}
+                if (e.model.isNew()) {
+
+                    editorPart.attr("disabled", false);
+
+                }
+                else {
+
+                    editorPart.attr("disabled", true);
+
+                }
+
+            }
+               if (editorStore) {
+                if (!editorStore.open()) {
+                    editorStore.enable(true);
+                    editorStore.open();
+                }
+              
+
+            }
+
+            if (parDesc) {
+                if (e.model.isNew()) {
+
+                    parDesc.attr("disabled", false);
+
+                }
+                else {
+
+                    parDesc.attr("disabled", true);
+
+                }
+
+            }
+            if (parLongDesc) {
+                if (e.model.isNew()) {
+                    parLongDesc.attr("disabled", false);
+                } else {
+                    parLongDesc.attr("disabled", true);
+                }
+
+            }
+        }
+    }
+    function partTemplate(container, options) {
+        var iconTemplate = '<button  onclick="openPart()"><span class="k-icon k-i-search"></span></button';
+        $('<input name="par_code">')
+            .appendTo(container)
+            .kendoTextBox({
+                change: function (e) {
+                    $.ajax({
+                        url: `/Home/SelectPart?part=${e.value}`,
+                        type: 'POST',
+
+                        data: e.value,
+                        success: function (data) {
+                            var grid = $('#grdPart').data('kendoGrid');
+                            var model = grid.dataSource.at(0);
+                            model.set("sto_store", data.storecode);
+                            model.set("par_desc", data.txtpartdesc);
+                            model.set("par_longdescription", data.txtpartlongdesc);
+                        }
+                    });
+                }
+                //autoBind: false,
+                //dataTextField: "partCode",
+
+                //change: function (e) {
+                //    var ddl = this;
+
+                //    var text = ddl.dataItem().partCode;
+                //    var grid = $('#grdPart').data('kendoGrid');
+                //    var model = grid.editable.options.model;
+                //    model.set("par_code", text);
+                //    $.ajax({
+                //        url: `/Home/SelectPart?part=${text}`,
+                //        type: 'POST',
+
+                //        data: text,
+                //        success: function (data) {
+                //            model.set("sto_store", data.storecode);
+                //            model.set("par_desc", data.txtpartdesc);
+                //            model.set("par_longdescription", data.txtpartlongdesc);
+                //        }
+                //    });
+
+
+
+
+
+
+                // },
+                //    click: function (e) {
+
+
+                //        // Code to handle the click event when the drop-down is opened
+                //        openPart();
+                //    },
+                //    dataSource: {
+                //    transport: {
+                //        read: '@Url.Action("GetPartList","Home")'
+                //    }
+                //}
+            });
+        container.append(iconTemplate);
+        container.find(".k-i-search").css("cursor", "pointer").css("width", "20px").css("height", "20px");
+        container.find(".k-input").css("width", "80%");
+
+    }
+    function onClose(e) {
+        $.ajax({
+            url: `/Home/getPartSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                var grid = $('#grdPart').data('kendoGrid');
+                var dataItem = grid.dataSource.at(0);
+
+                dataItem.set("par_code", data.par_code);
+                dataItem.set("sto_store", data.sto_store);
+                dataItem.set("par_desc", data.par_desc);
+                dataItem.set("par_longdescription", data.par_longdescription);
+
+            }
+        });
+    }
+    function grdBOO_SaveChange(e) {
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+        lsObj.forEach(function (obj) {
+
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+
+        $.ajax({
+            url: `/ELEForm/SaveChangeBoo`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdBOO").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+    function saveChangeStatus(e) {
+
+        if (e.checked) {
+            if (e.sender.options.value === "1") {
+
+                $("#Cb_Status2").prop("checked", false);
+                $("#Cb_Status3").prop("checked", false);
+
+            }
+            else if (e.sender.options.value === "2") {
+
+                $("#Cb_Status1").prop("checked", false);
+                $("#Cb_Status3").prop("checked", false);
+            }
+            else if (e.sender.options.value === "3") {
+
+                $("#Cb_Status1").prop("checked", false);
+                $("#Cb_Status2").prop("checked", false);
+            }
+        }
+    }
+    function NamePersonTemplate(container, options) {
+        $('<input name="HoTen">')
+            .appendTo(container)
+            .kendoComboBox({
+                autoBind: false,
+                dataTextField: "per_desc",
+                dataValueField: "per_code",
+                change: function (e) {
+                    var ddl = this;
+                    var code = ddl.dataItem().per_code
+                    var desc = ddl.dataItem().per_desc;
+                    var job = ddl.dataItem().per_jobtitle;
+
+                    var grid = $('#grdTablePerson').data('kendoGrid');
+                    var model = grid.editable.options.model;
+                    model.set("MaPer", code);
+                    model.set("HoTen", desc);
+                    model.set("ChucDanh", job);
+                },
+                dataSource: {
+                    transport: {
+                        read: '@Url.Action("GetPersonList","ELEForm")'
+                    }
+                }
+            }).data("kendoComboBox").value(options.model.MaPer);
+    }
+    function NamePersonTemplateBoo(container, options) {
+        $('<input name="TenNV">')
+            .appendTo(container)
+            .kendoComboBox({
+                autoBind: false,
+                dataTextField: "per_desc",
+                dataValueField: "per_code",
+                change: function (e) {
+                    var ddl = this;
+                    var code = ddl.dataItem().per_code;
+                    var desc = ddl.dataItem().per_desc;
+                    var job = ddl.dataItem().per_jobtitle;
+                    var trade = ddl.dataItem().per_trade;
+                    var grid = $('#grdBOO').data('kendoGrid');
+                    var model = grid.editable.options.model;
+                    model.set("MaNV", code);
+                    model.set("TenNV", desc);
+                    model.set("ChucDanh", job);
+                    model.set("Bac", trade);
+                },
+                dataSource: {
+                    transport: {
+                        read: '@Url.Action("GetPersonList","ELEForm")'
+                    }
+                }
+            }).data("kendoComboBox").value(options.model.MaNV);
+    }
+    function nguoichophep_savechange(e) {
+        var ddl = this;
+        var job = ddl.dataItem().per_jobtitle;
+
+        $("#txChucDanh").data("kendoTextBox").value(job);
+    }
+    function templateNgay(thoigianlamviec) {
+        if (thoigianlamviec) {
+            var ngay = parseInt((parseInt(thoigianlamviec.replace("h", ""), 0) + 23) / 24, 0);
+            return ngay;
+        }
+        return "";
+    }
+    function toast({ title = "", message = "", img = "", duration = 1000 }) {
+        const main = document.getElementById("toasts");
+        if (main) {
+            const toast = document.createElement("div");
+
+            // Auto remove toast
+            const autoRemoveId = setTimeout(function () {
+                main.removeChild(toast);
+            }, duration + 1000);
+
+            // Remove toast when clicked
+            toast.onclick = function (e) {
+                if (e.target.closest(".toast__close")) {
+                    main.removeChild(toast);
+                    clearTimeout(autoRemoveId);
+                }
+            };
+            const delay = (duration / 1000).toFixed(2);
+
+            toast.classList.add("toasts");
+            toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+
+            toast.innerHTML = `
+                                                                                                                                                                                                                                                                                                                                    <div class="notifications-item" style="border-bottom:0px;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img src="${img}" alt="img"    />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 <div class="text">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div style="width:100%;"><h    4 style="width:auto">${title}</h4></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <p style="font-size:13px">$    {message}</p>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                 </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                     <span class="toast__close"     style="float:right;margin-left:30px;margin-top:15px"> <img src="/Images/delete.png" style="width:16px;height:16px" /></span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                             </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      `;
+            main.appendChild(toast);
+        }
+    }
+    function showToast(toastNotification, img, title) {
+        toast({
+            title: title,
+            message: toastNotification,
+            img: img,
+            duration: 1000 * 10
+        });
+    }
+    $(document).ready(function () {
+        $('#section').on('click', function (e) {
+            e.preventDefault();
+            $('#content').animate({ scrollTop: $('#content')[0].scrollHeight }, 500, 'linear');
+        });
+    });
+    function grdTablePerson_edit(e){
+         var dataItem = e.model;
+       
+        if (dataItem) {
+
+            var chucdanh = e.container.find("[name=ChucDanh]");
+            var hoten = e.container.find("[name=HoTen]").data("kendoComboBox");
+
+
+            if (hoten) {
+
+
+                if (!hoten.open()) {
+                    hoten.open();
+
+                }
+            }
+            if (chucdanh) {
+                chucdanh.attr("disabled", true);
+
+            }
+        }
+    }
+      function grdBOO_edit(e){
+         var dataItem = e.model;
+       
+        if (dataItem) {
+
+            var chucdanh = e.container.find("[name=ChucDanh]");
+            var tenNV = e.container.find("[name=TenNV]").data("kendoComboBox");
+
+
+            if (tenNV) {
+
+
+                if (!tenNV.open()) {
+                    tenNV.open();
+
+                }
+
+
+
+            }
+            var bac = e.container.find("[name=Bac]");
+            
+            if (chucdanh) {
+                chucdanh.attr("disabled", true);
+
+            }
+             if (bac) {
+                bac.attr("disabled", true);
+
+            }
+        }
+    }
+    function grdTablePerson_SaveChange(e){
+         var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+        lsObj.forEach(function (obj) {
+
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+     
+        $.ajax({
+            url: `/ELEForm/SaveChangePersonTable`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdTablePerson").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+    function tenTBTemplate(container, options) {
+        var iconTemplate = '<button  onclick="openTool()"><span class="k-icon k-i-search"></span></button';
+        $('<input name="Ten_TB">')
+            .appendTo(container)
+            .kendoTextBox({
+                change: function (e) {
+                    $.ajax({
+                        url: `/ELEForm/SelectTool?Ten_TB=${e.value}`,
+                        type: 'POST',
+                        data: e.value,
+                        success: function (data) {
+                            var grid = $('#grdTool').data('kendoGrid');
+                            var model = grid.dataSource.at(0);
+                             model.set("Ma_Ky_Hieu", data.Ma_Ky_Hieu);
+                            model.set("So_Seri", data.So_Seri);
+                            model.set("Ma_Tool", data.Ma_Tool);
+                            model.set("Nha_SX", data.Nha_SX);
+                             model.set("Hang_Kiem_Dinh", data.Hang_Kiem_Dinh);
+                        }
+                    });
+                }
+                //autoBind: false,
+                //dataTextField: "partCode",
+
+                //change: function (e) {
+                //    var ddl = this;
+
+                //    var text = ddl.dataItem().partCode;
+                //    var grid = $('#grdPart').data('kendoGrid');
+                //    var model = grid.editable.options.model;
+                //    model.set("par_code", text);
+                //    $.ajax({
+                //        url: `/Home/SelectPart?part=${text}`,
+                //        type: 'POST',
+
+                //        data: text,
+                //        success: function (data) {
+                //            model.set("sto_store", data.storecode);
+                //            model.set("par_desc", data.txtpartdesc);
+                //            model.set("par_longdescription", data.txtpartlongdesc);
+                //        }
+                //    });
+
+
+
+
+
+
+                // },
+                //    click: function (e) {
+
+
+                //        // Code to handle the click event when the drop-down is opened
+                //        openPart();
+                //    },
+                //    dataSource: {
+                //    transport: {
+                //        read: '@Url.Action("GetPartList","Home")'
+                //    }
+                //}
+            });
+        container.append(iconTemplate);
+        container.find(".k-i-search").css("cursor", "pointer").css("width", "20px").css("height", "20px");
+        container.find(".k-input").css("width", "80%");
+
+    }
+    function openTool() {
+        var windowMSR = $("#winTool").data("kendoWindow");
+        windowMSR.setOptions({
+
+            height: 500,
+            width: 850
+        });
+        windowMSR.refresh({
+            url: "/LoadTool/Index",
+            iframe: true,
+        });
+        windowMSR.center();
+        windowMSR.open();
+    }
+    function onCloseTool(e) {
+        $.ajax({
+            url: `/ELEForm/getToolSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                var grid = $('#grdTool').data('kendoGrid');
+                var dataItem = grid.dataSource.at(0);
+                 dataItem.set("Ma_Tool", data.Ma_Tool);
+                dataItem.set("Ma_Ky_Hieu", data.Ma_Ky_Hieu);
+                dataItem.set("So_Seri", data.So_Seri);
+                dataItem.set("Ten_TB", data.Ten_TB);
+                dataItem.set("Nha_SX", data.Nha_SX);
+                 dataItem.set("Hang_Kiem_Dinh", data.Hang_Kiem_Dinh);
+               
+            }
+        });
+    }
+    function grdTool_edit(e){
+         var dataItem = e.model;
+     
+        if (dataItem) {
+
+            var Ten_TB = e.container.find("[name=Ten_TB]");
+             var Ma_Ky_Hieu = e.container.find("[name=Ma_Ky_Hieu]");
+            var search = e.container.find(".k-i-search");
+            var Nha_SX = e.container.find("[name=Nha_SX]");
+            var Hang_Kiem_Dinh = e.container.find("[name=Hang_Kiem_Dinh]");
+            var So_Seri = e.container.find("[name=So_Seri]");
+          
+            if (search) {
+                if (e.model.isNew()) {
+
+
+
+                }
+                else {
+
+                    search.hide();
+
+                }
+            }
+            if (Ten_TB) {
+                //if (e.model.isNew()) {
+                //    if (!editorPart.open()) {
+                //        editorPart.enable(true);
+                //        editorPart.open();
+                //    }
+                //} else {
+                //    if (!editorPart.close()) {
+                //        editorPart.enable(false);
+                //        editorPart.close();
+                //    }
+
+                //}
+                if (e.model.isNew()) {
+
+                    Ten_TB.attr("disabled", false);
+
+                }
+                else {
+
+                    Ten_TB.attr("disabled", true);
+
+                }
+
+            }
+            if (Ma_Ky_Hieu) {
+              
+                Ma_Ky_Hieu.attr("disabled", true);
+
+            }
+
+             if (Nha_SX) {
+              
+                Nha_SX.attr("disabled", true);
+
+            }
+              if (Hang_Kiem_Dinh) {
+              
+                Hang_Kiem_Dinh.attr("disabled", true);
+
+            }
+              if (So_Seri) {
+              
+                So_Seri.attr("disabled", true);
+
+            }
+        }
+    }
+     function storeTemplate(container, options) {
+        var par_code = options.model.par_code;
+        $('<input name="sto_store">')
+            .appendTo(container)
+            .kendoComboBox({
+                autoBind: false,
+                dataSource: {
+                    transport: {
+                      
+                        read: '@Url.Action("getStoreList","Home",new {par_code = "__par_code__"})'.replace("__par_code__", par_code)
+                    }
+                }
+            });
+    }
+</script>

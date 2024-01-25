@@ -1,0 +1,133 @@
+﻿@model WO.Models.WODtoORA
+@using Kendo.Mvc.UI;
+@addTagHelper *, Kendo.Mvc
+@using Kendo.Mvc.TagHelpers;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/kendo.web.min.js"></script>
+    <script src="~/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/js/kendo.all.min.js"></script>
+    <link href="~/css/mdb-pro.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/styles/kendo.default-ocean-blue.min.css" />
+    @*<link rel="stylesheet" href="/styles/kendo.common.min.css"/>*@
+    <script src="~/js/kendo.all.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+
+</head>
+
+<body>
+    <div style="font-family: times !important">
+        <kendo-grid name="gridTool" navigatable="true" id="gridTool" selectable="row" style="height:400px !important" on-data-bound="databoundPart">
+            <datasource type="DataSourceTagHelperType.Ajax"
+                        server-operation="false"
+                        batch="true" page-size="50">
+                <schema>
+                    <model id="par_code">
+                        <fields>
+
+                            <field name="Ma_Tool" type="string" editable="false"></field>
+                            <field name="Ten_TB" type="string" editable="false"></field>
+                            <field name="Ma_Ky_Hieu" type="string" editable="false"></field>
+                            <field name="So_Seri" type="string" editable="false"></field>
+                            <field name="Nha_SX" type="string" editable="false"></field>
+                            <field name="Hang_Kiem_Dinh" type="string" editable="false"></field>
+                            <field name="status" type="number" editable="false"></field>
+
+                            <field name="idRow" type="number" editable="false"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <aggregates>
+                    <aggregate field="TotalSales" aggregate="sum" />
+                </aggregates>
+                <transport>
+                    <read url="@Url.Action("GetToolList","LoadTool")" />
+                    @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                    <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                    <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                </transport>
+            </datasource>
+            <columns>
+                <column field="Ma_Tool" title="Mã thiết bị</br>Коде" width="280" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                <column field="Ten_TB" title="Tên thiết bị</br>Наименованне" width="280" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }'  />
+                <column field="Ma_Ky_Hieu" title="Ký mã hiệu</br>Тип, моделъ" width="280" />
+
+                <column field="So_Seri" title="Số sê-ri</br>Заводской иомер" width="120" />
+                <column field="Nha_SX" title="Nhà sản xuất</br>Производитель" width="100" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                <column field="Hang_Kiem_Dinh" title="Hạn kiểm định</br>Дата поверки" width="150" />                                                                
+            </columns>
+            <toolbar>
+                <toolbar-button name="search" text="Tìm kiếm"></toolbar-button>
+            </toolbar>
+            @*  <pageable enabled="true" />*@
+            <editable enabled="true" />
+            <sortable enabled="true" />
+            <reorderable enabled="true" />
+            <scrollable enabled="true" />
+        </kendo-grid>
+    </div>
+    <div style="text-align:center;width:100%;margin-top:10px">
+        <kendo-button name="btnSave"
+                      tag="span"
+                      theme-color="ThemeColor.Primary" on-click="saveClick" style="width:100px;height:40px;font-size:13px">
+            Chọn thiết bị
+        </kendo-button>
+
+    </div>
+    <input id="checkUpdateGird" value="1" type="hidden"/>
+</body>
+<script>
+    function saveClick(e) {
+        var grid = $("#gridTool").data("kendoGrid");
+        var selectedRow = grid.select();
+        var dataItem = grid.dataItem(selectedRow);
+        var jsonData = JSON.stringify(dataItem);
+        $.ajax({
+            url: `/LoadPart/SaveToolSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: jsonData,
+            success: function (data) {
+                window.parent.$("#winTool").data("kendoWindow").close();
+            }
+        });
+    }
+    function onGridRowDoubleClick(e) {
+        // Access the data item associated with the double-clicked row
+        var dataSource = $("#gridTool").data("kendoGrid").dataSource;
+
+        // Access the data item associated with the double-clicked row
+        var dataItem = dataSource.data()[$(e.currentTarget).index()];
+
+        // Perform actions based on the data item
+        // Perform actions based on the data item
+        var jsonData = JSON.stringify(dataItem);
+
+        $.ajax({
+            url: `/LoadTool/SaveToolSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: jsonData,
+            success: function (data) {
+                window.parent.$("#winTool").data("kendoWindow").close();
+            }
+        });
+        // Add your custom logic here
+    }
+    function databoundPart() {
+        $("#gridTool").data("kendoGrid").tbody.on("dblclick", "tr[role='row']", onGridRowDoubleClick);
+       
+    }
+</script>
+</html>

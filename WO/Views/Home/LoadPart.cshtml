@@ -1,0 +1,176 @@
+﻿@model WO.Models.WODtoORA
+@using Kendo.Mvc.UI;
+@addTagHelper *, Kendo.Mvc
+@using Kendo.Mvc.TagHelpers;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <script src="~/js/jquery-3.2.1.min.js"></script>
+    <script src="~/js/kendo.web.min.js"></script>
+    <script src="~/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/js/kendo.all.min.js"></script>
+    <link href="~/css/mdb-pro.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/styles/kendo.default-ocean-blue.min.css" />
+    @*<link rel="stylesheet" href="/styles/kendo.common.min.css"/>*@
+    <script src="~/js/kendo.all.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
+
+
+</head>
+
+<body>
+    <div>
+        <kendo-grid name="gridPart" navigatable="true" id="gridPart" selectable="row" style="height:400px !important" on-data-bound="databoundPart">
+            <datasource type="DataSourceTagHelperType.Ajax"
+                        server-operation="false"
+                        batch="true" page-size="50">
+                <schema>
+                    <model id="par_code">
+                        <fields>
+
+                            <field name="par_code" type="string" editable="false"></field>
+                            <field name="sto_store" type="string" editable="false"></field>
+                            <field name="par_desc" type="string"
+                                   editable="false"></field>
+                            <field name="par_longdescription" type="string"
+                                   editable="false"></field>
+                            <field name="STO_QTY" type="string" editable="false"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <aggregates>
+                    <aggregate field="TotalSales" aggregate="sum" />
+                </aggregates>
+                <transport>
+                    <read url="@Url.Action("GetPartList","LoadPart")" />
+                    @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                    <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                    <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                </transport>
+            </datasource>
+            <columns>
+                @* <column width="75" selectable="true"
+                header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+                <column field="par_code" title="Mã vật tư </br> (код запчастей)" width="120" />
+                <column field="par_desc" title="Tên vật tư </br> (название запчастей материалов)" width="120" />
+                <column field="sto_store" title="Mã kho </br> (Склад)" width="120" />
+                <column field="STO_QTY" title="Số lượng" width="120" />
+                @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                @* <column field="Country.CountryNameLong" title="Country" width="120"
+                template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                editor="clientCountryEditor" />*@
+                @*<column field="UnitsInStock" title="Units" width="105" />
+                <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+            </columns>
+            <toolbar>
+                <toolbar-button name="search" text="Tìm kiếm"></toolbar-button>
+            </toolbar>
+            @*  <pageable enabled="true" />*@
+            <editable enabled="true" />
+            <sortable enabled="true" />
+            <reorderable enabled="true" />
+            <scrollable enabled="true" />
+        </kendo-grid>
+    </div>
+    <div style="text-align:center;width:100%;margin-top:10px">
+        <kendo-button name="btnSave"
+                      tag="span"
+                      theme-color="ThemeColor.Primary" on-click="saveClick" style="width:100px;height:40px;font-size:13px">
+            Select
+        </kendo-button>
+
+    </div>
+    <input id="checkUpdateGird" value="1" type="hidden"/>
+</body>
+<script>
+    function saveClick(e) {
+        var grid = $("#gridPart").data("kendoGrid");
+        var selectedRow = grid.select();
+        var dataItem = grid.dataItem(selectedRow);
+        var jsonData = JSON.stringify(dataItem);
+
+        $.ajax({
+            url: `/LoadPart/SavePartSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: jsonData,
+            success: function (data) {
+                window.parent.$("#winPart").data("kendoWindow").close();
+            }
+        });
+    }
+    function onGridRowDoubleClick(e) {
+        // Access the data item associated with the double-clicked row
+        var dataSource = $("#gridPart").data("kendoGrid").dataSource;
+
+        // Access the data item associated with the double-clicked row
+        var dataItem = dataSource.data()[$(e.currentTarget).index()];
+
+        // Perform actions based on the data item
+
+
+        // Perform actions based on the data item
+        var jsonData = JSON.stringify(dataItem);
+
+        $.ajax({
+            url: `/LoadPart/SavePartSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: jsonData,
+            success: function (data) {
+                window.parent.$("#winPart").data("kendoWindow").close();
+
+            }
+        });
+        // Add your custom logic here
+    }
+
+    function databoundPart() {
+        $("#gridPart").data("kendoGrid").tbody.on("dblclick", "tr[role='row']", onGridRowDoubleClick);
+        $("#gridPart").data("kendoGrid").content.on("scroll", function () {
+            // Your scroll event handling logic goes here
+            var grid = $("#gridPart").data("kendoGrid");
+
+            var lastRowHeight = grid.tbody.find("tr:last").height();
+            var totalRows = grid.dataSource.total();
+            var gridHeight = grid.content.height();
+            var currentScrollPosition = grid.content.scrollTop();
+
+            var isScrolledToBottom = currentScrollPosition + gridHeight >= (totalRows * lastRowHeight) - 1;
+            var checkUpdate = document.getElementById("checkUpdateGird").value;
+
+            // Kiểm tra xem bạn đã cuộn đến cuối cùng của grid chưa
+            if (isScrolledToBottom && checkUpdate == "1") {
+                document.getElementById("checkUpdateGird").value = "0";
+                var totalItem = grid.dataSource.total();
+                $.ajax({
+                    url: `/LoadPart/LoadDataScroll?totalItem=${totalItem}`,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: totalItem,
+                    success: function (data) {
+                        var grid = $("#gridPart").data("kendoGrid");
+
+                        data.forEach(function (item, index) {
+                            grid.dataSource.add(item);
+                            document.getElementById("checkUpdateGird").value = "1";
+                        });
+                    }
+                });
+            }
+        });
+    }
+</script>
+</html>

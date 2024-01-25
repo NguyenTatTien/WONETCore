@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.120" />
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2023.1.117">
+      <PrivateAssets>D:\001.DOCEAM\VIETSOV2\WOCORETEAM\.nuget\packages\telerik.ui.for.aspnet.core\2023.1.117D:\001.DOCEAM\VIETSOV2\WOCORETEAM\.nuget\packages\telerik.ui.for.aspnet.core\2023.1.117D:\001.DOCEAM\VIETSOV2\WOCORETEAM\.nuget\packages\telerik.ui.for.aspnet.core\2023.1.117</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Templates\**" />
+    <Content Remove="Templates\**" />
+    <EmbeddedResource Remove="Templates\**" />
+    <None Remove="Templates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\YCSCDto.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties UseCdnSupport="True" /></VisualStudio></ProjectExtensions>
+
+</Project>

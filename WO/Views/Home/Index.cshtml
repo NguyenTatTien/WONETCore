@@ -1,0 +1,1946 @@
+﻿@model WO.Models.WODtoORA
+@using Kendo.Mvc.UI;
+@addTagHelper *, Kendo.Mvc
+@using Kendo.Mvc.TagHelpers;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "XNK Form F4-F5";
+}
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+@*<link rel="stylesheet" href="/styles/kendo.moonlight.min.css">*@
+<script src="~/js/jquery-3.2.1.min.js"></script>
+<script src="~/js/kendo.web.min.js"></script>
+<script src="~/js/kendo.aspnetmvc.min.js"></script>
+<script src="~/js/kendo.all.min.js"></script>
+<link href="~/css/mdb-pro.css" rel="stylesheet" />
+<link rel="stylesheet" href="/styles/kendo.default-ocean-blue.min.css" />
+@*<link rel="stylesheet" href="/styles/kendo.common.min.css"/>*@
+<script src="~/js/kendo.all.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>
+<style type="text/css">
+    .styleIcon {
+        margin-left: -25px;
+        margin-top: 3px;
+        position: fixed;
+    }
+
+    .riTextBox[type="text"] {
+        padding-right: 23px !important;
+    }
+
+    .assetTitle {
+        font-size: 1.25em;
+        line-height: 1.5em;
+        text-overflow: ellipsis;
+        height: 1.5em;
+        white-space: nowrap;
+        margin-left: 5px;
+        overflow: hidden;
+        font-weight: normal;
+        font-family: serif;
+    }
+
+    .k-grid-footer {
+        display: none !important;
+    }
+
+    .assetDetail {
+        font-size: 1.15em;
+        line-height: 1.25em;
+        text-overflow: ellipsis;
+        height: 1.25em;
+        white-space: nowrap;
+        margin-left: 5px;
+        overflow: hidden;
+        font-weight: normal;
+        font-family: serif;
+    }
+
+    .rlbTemplate {
+        border-bottom-width: 1px !important;
+        border-style: solid;
+        border-width: 0px;
+        border-color: #d8d8d8;
+    }
+
+    #RAD_SPLITTER_PANE_CONTENT_ctl00_contentPane {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    .RadGrid {
+        width: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_ToolBarAsset_i0_lblAssetNamePanel {
+        display: contents !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetPMSchedulePanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetPMSchedule_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetPartUsagePanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetPartUsage_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetPartAssociatedPanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetPartAssociated_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetDepreciationPanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetDepreciation_GridData {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_ctl00_ContentPlaceHolder2_grdAssetEventPanel {
+        height: 100% !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdAssetEvent_GridData {
+        height: 100% !important;
+    }
+
+    .rgHeader {
+        border-right: 1px solid #d8d8d8;
+        color: white !important;
+        font: bold 12px/18px helvetica, arial, verdana, sans-serif;
+        outline: 0;
+        background-image: none;
+        background-color: #50535a;
+    }
+
+    .rtsTxt {
+        font: bold 12px/18px helvetica, arial, verdana, sans-serif;
+    }
+
+    .accordion dt a {
+        line-height: 1.2;
+        margin: 0.5em auto 0.6em;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        display: block;
+    }
+
+    .accordion dt span {
+        color: #085B8F;
+        font-size: 1.15em;
+        line-height: 1.2;
+        margin: 0.5em auto 0.6em;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        display: block;
+        font-weight: bold;
+        font-family: serif;
+    }
+
+    #RAD_SPLITTER_PANE_CONTENT_ctl00_ContentPlaceHolder2_Radpane1 {
+        display: flex !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_txtSearch {
+        height: 27px !important;
+    }
+
+    #ctl00_ContentPlaceHolder2_grdWO_GridData {
+        height: 60vh !important;
+    }
+
+    .rnContent {
+        font-size: 13px;
+    }
+
+    .RadTextBox_NoBorder {
+        border: none !important;
+        background-color: #fff !important;
+        font-family: times !important;
+        font-size: 12pt !important;
+    }
+
+    .radpane2detail {
+        overflow: hidden !important;
+    }
+
+    .AutoHeight {
+        height: auto !important;
+        overflow: auto;
+    }
+    /*   .rgCommandTable{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        display:none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }*/
+    .rgHeader {
+        font-family: times;
+        font-size: 12pt;
+        height: 35px;
+    }
+
+    .rgMasterTable {
+        font-family: times !important;
+        font-size: 12pt !important;
+    }
+
+    .txtblack {
+        border: none;
+        border-bottom: 1px dotted;
+    }
+
+        .txtblack:focus-visible {
+            border: none;
+        }
+
+    .rgAltRow {
+        background-color: #fff !important;
+    }
+
+    .RadGrid_Metro .rgSelectedRow > td {
+        background-color: #25a0da !important;
+    }
+
+    .RadGrid_Metro .rgRow > td, .RadGrid_Metro .rgAltRow > td, .RadGrid_Metro .rgEditRow > td {
+        border-width: 2px !important;
+    }
+
+    .hasDatepicker {
+        text-align: center;
+    }
+
+    .centerText {
+        text-align: center;
+    }
+
+    .btnSaveTrangThai {
+        color: lightgray !important;
+        cursor: pointer;
+        margin: 20px 10px;
+        width: 20%;
+        height: 40px;
+        background-color: gray !important;
+    }
+
+        .btnSaveTrangThai:hover {
+            background-color: lightgray !important;
+            color: dimgrey !important;
+        }
+
+    .centerbtn {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .RadButton_Silk {
+        color: white !important;
+        font-size: 12pt;
+    }
+
+        .RadButton_Silk:hover {
+        }
+
+    .rdSP2 {
+        height: max-content !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    .rspPaneHorizontal {
+        border: none !important;
+    }
+
+    .rdSP2 table {
+        height: max-content !important;
+        width: 100% !important;
+        position: relative !important;
+        table-layout: fixed;
+    }
+
+    td {
+        font-size: 13pt !important; /* Đặt kích thước font cho toàn bộ trang */
+    }
+
+    .rcbActionButton {
+        display: none !important;
+    }
+
+    .rgCommandCell {
+        background: #50535a !important;
+    }
+
+    .rcbInner {
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .rcbInput {
+        text-align: center;
+    }
+
+    .RadGrid_Metro .rgCommandRow a {
+        color: white !important;
+    }
+
+    .rgCommandCell {
+        font-family: times !important;
+        font-size: 12pt !important;
+        background: #50535a;
+        color: white !important;
+    }
+
+    .modal {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 5px;
+        background: white;
+    }
+
+    .message {
+        font-size: 13px;
+        margin-bottom: 1.6rem;
+        margin-top: 0;
+    }
+
+    .btn {
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        background: white;
+        padding: 0.3rem 3.4rem;
+        border: 3px solid black;
+        margin-right: 2.6rem;
+        box-shadow: 0 0 0 black;
+        transition: all 0.2s;
+    }
+
+        .btn:last-child {
+            margin: 0;
+        }
+
+        .btn:hover {
+            box-shadow: 0.4rem 0.4rem 0 black;
+            transform: translate(-0.4rem, -0.4rem);
+        }
+
+        .btn:active {
+            box-shadow: 0 0 0 black;
+            transform: translate(0, 0);
+        }
+
+    .options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #scrollButton {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .scroll-section {
+        height: 100vh;
+        background-color: #c0c0c0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    #scrolldown {
+        position: fixed;
+        top: 80%;
+        left: 97%;
+        width: 46px;
+        height: 46px;
+        margin-left: -23px;
+        border: 1px solid #fff;
+        border-radius: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+    }
+
+        #scrolldown:hover {
+            border: 1px solid gray;
+            background-color: white;
+        }
+
+            #scrolldown:hover::after {
+                border-left: 1px solid gray;
+                border-bottom: 1px solid gray;
+            }
+
+        #scrolldown::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            content: '';
+            width: 16px;
+            height: 16px;
+            margin: -12px 0 0 -8px;
+            border-left: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            box-sizing: border-box;
+        }
+
+    .displaynone {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 95% !important;
+        width: 92% !important;
+    }
+
+    .notifications {
+        width: 300px;
+        overflow: scroll;
+        height: 0;
+        opacity: 0;
+        position: absolute;
+        top: 40px;
+        right: 62px;
+        border-radius: 5px 0px 5px 5px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    }
+
+        .notifications h2 {
+            font-size: 14px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            color: #999
+        }
+
+            .notifications h2 span {
+                color: #f00
+            }
+
+    .notifications-item {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        padding: 6px 9px;
+        margin-bottom: 0px;
+        cursor: pointer
+    }
+
+        .notifications-item:hover {
+            background-color: #eee
+        }
+
+        .notifications-item img {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            margin-top: 2px
+        }
+
+        .notifications-item .text h4 {
+            color: #777;
+            font-size: 16px;
+            margin-top: 3px
+        }
+
+        .notifications-item .text p {
+            color: #aaa;
+            font-size: 12px
+        }
+
+    #toasts {
+        position: fixed;
+        bottom: 30px;
+        right: 32px;
+        z-index: 999999;
+    }
+
+    body {
+        overflow: hidden !important;
+    }
+
+    .toast__close {
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+    }
+
+    .toasts {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 2px;
+        padding: 10px 0;
+        max-width: 450px;
+        border-left: 4px solid;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+        transition: all linear 0.3s;
+    }
+
+        .toasts + .toasts {
+            margin-top: 24px;
+        }
+
+    table th span {
+        justify-content: center !important;
+    }
+
+
+
+    #grdData .k-combobox button {
+        display: initial !important;
+    }
+
+    .k-combobox .k-clear-value {
+        display: none;
+    }
+
+    .k-column-title {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .k-grid-header {
+        background-color: #757575 !important;
+        color: white !important;
+    }
+
+    .k-grid-content.k-auto-scrollable {
+        overflow: hidden !important;
+    }
+
+    .k-checkbox-item {
+        width: max-content !important;
+    }
+
+    .k-checkbox-list {
+        align-items: center;
+    }
+
+    .k-grid-header {
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /*.k-combobox input {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                border-bottom: 1px solid gray !important;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }*/
+
+    #cbGroupDat {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .k-checkbox-list-horizontal, .k-checkbox-list.k-list-horizontal {
+        margin-right: -100px !important;
+    }
+</style>
+<div class="text-center" id="content" style="height:100%;position:absolute;overflow-y:scroll;">
+    <div style="width: 100%; height: auto; background-color: gray">
+        <div class="container" style="background:#fff;padding-left:0px;padding-right:0px">
+            <div id="MainSplitter" class="rdSP2">
+                <div id="Radpane2" class="AutoHeight rdSP2" style="text-align:left;padding-left:15px;padding-right:15px">
+                    <div id="SubSplitter" class="rdSP2">
+                        <div class="radpane2detail rdSP2" id="PanelStoreDetail">
+                            <div style="color: lack; font-size: 16px; text-align: right;font-weight:600; font-family: serif; margin-top:30px">
+                                No: PHT-006/F4</br>LBH: 09-HL:22/09/2021
+                            </div>
+                            <br />
+                            <div style="color: lack; font-size: 22px; text-align: center; font-weight: bold; font-family: serif; margin-top:0px">NỘI DUNG BẢO DƯỠNG ĐỊNH KỲ THIẾT BỊ </br> (СОДЕРЖАНИЕ РАБОТ ППР ОБОРУДОВАНИЯ)  </div>
+                            <br />
+                            <table width="100%" style="font-family: times; font-size: 12pt; margin-left: 10px;table-layout:auto">
+                                <tr>
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">Giàn(Объект):</span> <kendo-textbox name="txtGian" class="RadTextBox_NoBorder" readonly="true" for="@Model.gian" style="width:250px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">
+                                            Bộ phận(служба):
+                                        </span>
+                                        <kendo-textbox name="txtBoPhan" class="RadTextBox_NoBorder" readonly="true" for="@Model.bophan" style="width:250px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">
+                                            Tên thiết bị:
+                                        </span>
+                                        <kendo-textbox name="txtTenThietBi" class="RadTextBox_NoBorder" readonly="true" for="@Model.tentbi" style="width:250px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">Mã thiết bị:</span>
+                                        <kendo-textbox name="txtMaThietBi" class="RadTextBox_NoBorder" readonly="true" for="@Model.matbi" style="width:250px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">Tên bảo dưỡng:</span>
+                                        <kendo-textbox name="txtTenBaoDuong" class="RadTextBox_NoBorder" for="TenBD" readonly="true" style="width:550px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">
+                                            Mã số bảo dưỡng:
+                                        </span>
+                                        <kendo-textbox name="txtMasobaoduong" readonly="true" class="RadTextBox_NoBorder" for="MaBD" style="width:250px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 500px; padding-right: 2px;">
+                                        <span style="font-weight:bold">
+                                            Nhân lực thực hiện:
+                                        </span>
+                                        <kendo-textbox name="txtNhanLucThucHien" class="RadTextBox_NoBorder" for="nhanluc" style="width:250px">
+
+                                        </kendo-textbox>
+                                    </td>
+
+                                    <td align="left" style="width: 500px; padding-right: 2px">
+                                        <span style="font-weight:bold">
+                                            Thời gian bảo dưỡng:
+                                        </span>
+                                        <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" value="@(Model.evt_TGBD != null ?@Model.evt_TGBD.Value.ToString("dd/MM/yyyy"):string.Empty)" style="width:250px">
+                                        </kendo-textbox>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div ID="Radpane3" runat="server" class="AutoHeight rdSP2" Width="100%" ShowContentDuringLoad="False" style="text-align:left;font-family: times !important;">
+                        <span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px"><i>I/ Nội dung công việc (содержанию рaбom):</i></span>
+                        <div class="button-container">
+                        </div>
+
+
+                        <kendo-grid name="grdData" navigatable="true" id="grdData" on-save-changes="grddata_SaveChange" on-edit="grdData_edit">
+                            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                        server-operation="false"
+                                        batch="true">
+                                <schema>
+                                    <model id="idRow">
+                                        <fields>
+                                            <field name="MaCV" type="string" editable="false"></field>
+                                            <field name="hangmuccv" type="string" editable="true"></field>
+                                            <field name="ngaythuchien" type="date" editable="true"></field>
+                                            <field name="trangthai" type="string" editable="true"></field>
+                                            <field name="ghichu" type="string" editable="true"></field>
+                                            <field name="ACT_ACT" type="string" editable="true"></field>
+                                            <field name="ACT_EVENT" type="string" editable="true"></field>
+                                            <field name="isnew" type="number" editable="true"></field>
+                                            <field name="matlist" type="string" editable="true"></field>
+                                            <field name="thoigian" type="number" editable="true"></field>
+                                            <field name="status" type="number" editable="true"></field>
+                                            <field name="nhanluc" type="number" editable="true"></field>
+                                            <field name="idRow" type="number" editable="false"></field>
+                                        </fields>
+                                    </model>
+                                </schema>
+                                <aggregates>
+                                    <aggregate field="TotalSales" aggregate="sum" />
+                                </aggregates>
+                                <transport>
+                                    <read url="@Url.Action("GetTableData","Home")" />
+                                    @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                    <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                    <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                </transport>
+                            </datasource>
+                            <columns>
+                                @* <column width="75" selectable="true"
+                                header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+
+                                <column field="MaCV" title="Mã công việc</br>Код рaбom" width="170" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                <column field="hangmuccv" title="Hạng mục công việc</br>Описание рaбom" width="320" />
+                                <column field="ngaythuchien" title="Ngày thực hiện</br>Дата" width="110" format="{0:dd/MM/yyyy}" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                <column field="nguoithuchien" title="Người  thực hiện</br>Персонал" width="120" />
+                                <column field="trangthai" title="Trạng thái</br>Статус" width="100" editor="trangthaiTemplateEdit" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                <column field="ghichu" title="Ghi chú</br>примечание" width="150" />
+                                <column width="30" template="#=DeleteTemplate(idRow)#" html-attributes='new Dictionary<string, object>{ ["style"] = "padding:inherit;" }' />
+                                @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                editor="clientCountryEditor" />*@
+                                @*<column field="UnitsInStock" title="Units" width="105" />
+                                <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                            </columns>
+                            <toolbar>
+                                <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+
+                            </toolbar>
+                            <editable enabled="true" />
+                            <sortable enabled="true" />
+                            <reorderable enabled="true" />
+                            <scrollable enabled="true" />
+                        </kendo-grid>
+                    </div>
+                    <div id="Radpane4" class="AutoHeight rdSP2" style="text-align:left;font-family: times !important;">
+                        <span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px"><i>II/ Vật tư, phụ tùng (запчасти):</i></span>
+                        <kendo-grid name="grdPart" navigatable="true" id="grdPart" on-save-changes="grdPart_SaveChange" on-edit="grdPart_edit">
+                            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                        server-operation="false"
+                                        batch="true">
+                                <schema>
+                                    <model id="idRow">
+                                        <fields>
+                                            <field name="par_code" type="string" editable="true"></field>
+                                            <field name="sto_store" type="string" editable="true"></field>
+                                            <field name="par_desc" type="string" editable="true"></field>
+                                            <field name="par_longdescription" type="string" editable="true"></field>
+                                            <field name="calculated_column" type="number" editable="true"></field>
+                                            <field name="act_matlist" type="string" editable="true"></field>
+                                            <field name="act_act" type="string" editable="true"></field>
+                                            <field name="act_note" type="string" editable="true"></field>
+                                            <field name="STO_QTY" type="string" editable="true"></field>
+                                            <field name="vitrithaythe" type="string" editable="false"></field>
+                                            <field name="oldUsedQty" type="string" editable="true"></field>
+                                            <field name="oldPlanedQty" type="string" editable="true"></field>
+                                            <field name="status" type="number" editable="true"></field>
+                                            <field name="mlp_qty" type="number" editable="true"></field>
+                                            <field name="idRow" type="number" editable="true"></field>
+                                        </fields>
+                                    </model>
+                                </schema>
+                                <aggregates>
+                                    <aggregate field="TotalSales" aggregate="sum" />
+                                </aggregates>
+                                <transport>
+                                    <read url="@Url.Action("GetTablePart","Home")" />
+                                    @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                    <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                    <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                </transport>
+                            </datasource>
+                            <columns>
+                                @* <column width="75" selectable="true"
+                                header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+                                <column field="par_code" title="Mã vật tư </br> (код запчастей)" width="140" editor="partTemplate" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                <column field="sto_store" title="Mã kho </br> (Склад)" width="120" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' editor="storeTemplate"/>
+                                <column field="par_longdescription" title="Part number </br> (номер запчастеи)" width="120" />
+                                <column field="par_desc" title="Tên vật tư </br> (название запчастей материалов)" width="200" />
+                                <column title="Số lượng (к-во)">
+                                    <columns>
+                                        <column field="mlp_qty" title="Kế hoạch (план)" width="85" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                        <column field="calculated_column" title="Thực tế (факт)" width="85" html-attributes='new Dictionary<string, object>{ ["style"] = "text-align:center;" }' />
+                                    </columns>
+                                </column>
+                                <column field="vitrithaythe" title="Vị trí thay thế </br> (место установки)" width="120" />
+
+                                @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                editor="clientCountryEditor" />*@
+                                @*<column field="UnitsInStock" title="Units" width="105" />
+                                <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                            </columns>
+                            <toolbar>
+                                <toolbar-button name="create" text="Thêm mới"></toolbar-button>
+                                <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                            </toolbar>
+                            <editable enabled="true" />
+                            <sortable enabled="true" />
+                            <reorderable enabled="true" />
+                            <scrollable enabled="true" />
+                        </kendo-grid>
+                    </div>
+                    <div id="Radpane1" class="AutoHeight rdSP2">
+                        <div id="RadSplitter1" class="rdSP2">
+                            <div class="radpane2detail rdSP2">
+                                <br />
+                                <table width="100%" style="font-family: times; font-size: 12pt; margin-left: 10px;table-layout:auto;margin-bottom:20px">
+                                    <tr>
+                                        <td align="left" style="width: 150px; padding-right: 2px; margin-bottom: 15px;"><b>Ký tên(подпись):</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33%; text-align: center;">Kỹ sư BDSC</td>
+                                        <td style="width: 33%; text-align: center;">Trưởng bộ phận</td>
+                                        <td style="width: 33%; text-align: center;">Lãnh đạo giàn</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33%; text-align: center;">Инженер ППР</td>
+                                        <td style="width: 33%; text-align: center;">Рук. Службы</td>
+                                        <td style="width: 33%; text-align: center;">Рук. объекта</td>
+                                    </tr>
+                                    <tr style="height: 100px"></tr>
+                                    <tr>
+                                        <td style="width: 33%; text-align: center;">
+
+                                            <kendo-combobox name="cbKSBBDSC_2"
+                                                            datatextfield="per_desc"
+                                                            datavaluefield="per_code"
+                                                            filter="FilterType.Contains" value="@Model.KSBBDCS" on-select="cbBSSC_select" style="width:70%;text-align:center">
+                                                <datasource>
+                                                    <transport>
+                                                        <read url="@Url.Action("loadDataPreson", "Home")" />
+                                                    </transport>
+                                                </datasource>
+                                            </kendo-combobox>
+                                        </td>
+                                        <td style="width: 33%; text-align: center;">
+
+                                            <kendo-combobox name="cbTruongBoPhan_2"
+                                                            datatextfield="per_desc"
+                                                             datavaluefield="per_code"
+                                                            filter="FilterType.Contains" value="@Model.TruongBoPhan" on-select="cbTBP_select" style="width:70%;text-align:center">
+                                                <datasource>
+                                                    <transport>
+                                                        <read url="@Url.Action("loadDataPreson", "Home")" />
+                                                    </transport>
+                                                </datasource>
+                                            </kendo-combobox>
+                                        </td>
+                                        <td style="width: 33%; text-align: center;">
+
+                                            <kendo-combobox name="cbLanhDaoGian_2"
+                                                            datatextfield="per_desc"
+                                                            datavaluefield="per_code"
+                                                            filter="FilterType.Contains" value-primitive="true" value="@Model.LanhDaoGian" on-select="cbGian_select" style="width:70%;text-align:center">
+                                                <datasource>
+                                                    <transport>
+                                                        <read url="@Url.Action("loadDataLanhDaoGian", "Home")" />
+                                                    </transport>
+                                                </datasource>
+                                            </kendo-combobox>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33%; text-align: center;">
+                                            Ngày(Дата):  <kendo-datepicker name="ngayKSBBDSC"
+                                                                           format="{0:dd/MM/yyyy}"
+                                                                           on-change="ngayngayKSBBDSC_select"
+                                                                           value='!string.IsNullOrEmpty(Model.NgayKSBBDSC)?DateTime.ParseExact(Model.NgayKSBBDSC,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                           style="width: 150px;text-align:center;">
+                                            </kendo-datepicker>
+                                        </td>
+
+                                        <td style="width: 33%; text-align: center;">
+                                            Ngày(Дата):  <kendo-datepicker name="ngayTruongBoPhan"
+                                                                           format="{0:dd/MM/yyyy}"
+                                                                           on-change="ngayTruongBoPhan_select"
+                                                                           value='!string.IsNullOrEmpty(Model.NgayTruongBoPhan)?DateTime.ParseExact(Model.NgayTruongBoPhan,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                           style="width: 150px;text-align:center;">
+                                            </kendo-datepicker>
+                                        </td>
+                                        <td style="width: 33%; text-align: center;">
+                                            Ngày(Дата):  <kendo-datepicker name="ngayLanhDaoGian"
+                                                                           format="{0:dd/MM/yyyy}"
+                                                                           on-change="ngayLanhDaoGian_select"
+                                                                           value='!string.IsNullOrEmpty(Model.NgayLanhDao)?DateTime.ParseExact(Model.NgayLanhDao,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                           style="width: 150px;text-align:center;">
+                                            </kendo-datepicker>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 40px; border-width: 0; background-color: gray;"></div>
+                <div id="RadSplitter2" class="rdSP2" style="text-align:left;padding-left:15px;padding-right:15px">
+                    <div id="Radpane8" class="rdSP2">
+                        <div id="RadSplitter4">
+                            <div class="radpane2detail rdSP2" id="RadPane9">
+                                <div style="color: lack; font-size: 16px; text-align: right;font-weight:600; font-family: serif; margin-top:30px">
+                                    No: PHT-006/F5</br>LBH: 09-HL:22/09/2021
+                                </div>
+                                </br>
+                                <div style="color: black; font-size: 22px; text-align: center; font-weight: bold; font-family: serif;padding-top:0px">BIÊN BẢN NGHIỆM THU KẾT QUẢ</br> BẢO DƯỠNG SỬA CHỮA THIẾT BỊ</br> АКТ ПРИЕМКИ ОБОРУДОВАНИЯ ПОСЛЕ ППР</div>
+                                <br />
+                                <table width="100%" style="font-family: times; font-size: 12pt; margin-left: 10px;table-layout:auto">
+                                    <tr>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Giàn(Объект):
+                                            </span>
+
+                                            <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="gian" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Bộ phận(служба):
+                                            </span><kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="bophan" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Tên thiết bị:
+                                            </span>
+                                            <kendo-textbox name="txttentbi" class="RadTextBox_NoBorder" readonly="true" for="matbi" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                        <td align="left" style="width:700px; padding-right: 2px;">
+                                            <span style="font-weight:bold">
+                                                Thời gian làm việc của thiết bị (наработка оборудования):
+                                            </span>
+
+                                            <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="TGLVThietBi" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Mã thiết bị:
+                                            </span>
+
+                                            <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="matbi" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Thời gian thực tế bắt đầu BDSC: (Факт начало ТО):
+                                            </span>
+
+                                            <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="evt_TGBD" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Tên bảo dưỡng:
+                                            </span>
+                                            @* <telerik:RadTextBox ID="txtTenBD1" CssClass="RadTextBox_NoBorder" runat="server" Skin="MetroTouch" Width="550" ReadOnly="True" />*@
+                                            <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="TenBD" style="width:350px">
+                                            </kendo-textbox>
+                                        </td>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Thời gian thực tế kết thúc BDSC: (Факт Конец ТО):
+                                            </span>
+
+                                            <kendo-textbox class="RadTextBox_NoBorder" readonly="true" for="evt_TGKT" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="width: 500px; padding-right: 2px">
+                                            <span style="font-weight:bold">
+                                                Mã số bảo dưỡng:
+                                            </span>
+
+                                            <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true" for="MaBD" style="width:250px">
+                                            </kendo-textbox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        @* <td align="left" style="width:600px; padding-right: 2px;">
+                                        Thời gian làm việc của thiết bị (наработка оборудования):
+
+                                        <kendo-textbox name="txtThoigianbaoduong" class="RadTextBox_NoBorder" readonly="true"  for="TGLVThietBi">
+                                        </kendo-textbox>
+                                        </td>*@
+                                    </tr>
+                                    <tr>
+                                        @* <td align="left" style="width: 600px; padding-right: 2px">
+                                        Thời gian thực tế bắt đầu BDSC: (Факт начало ТО):
+
+                                        <kendo-textbox name="txtThoigianbaoduong"  class="RadTextBox_NoBorder" readonly="true"  for="evt_TGBD">
+                                        </kendo-textbox>
+                                        </td>*@
+                                    </tr>
+                                    <tr>
+                                        @* <td align="left" style="width: 600px; padding-right: 2px">
+                                        Thời gian thực tế kết thúc BDSC: (Факт Конец ТО):
+
+                                        <kendo-textbox  class="RadTextBox_NoBorder" readonly="true"  for="evt_TGKT">
+                                        </kendo-textbox>
+                                        </td>*@
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"></td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Radpane6" class="AutoHeight rdSP2" style="font-family: times !important;">
+                        <span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px"><i>I. Các thông số kỹ thuật (параметре):</i></span>
+                        <div>
+                            <table style="width: 100%; border: 2px solid gray">
+                                <tr>
+                                    <td style="border: 1px solid gray">
+                                        <kendo-grid name="gridThongSo" navigatable="true" id="gridThongSo" on-save-changes="grdThongSo_SaveChange">
+                                            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                                                        server-operation="false"
+                                                        batch="true">
+                                                <schema>
+                                                    <model id="TSKT_DESC">
+                                                        <fields>
+
+                                                            <field name="TSKT_DESC" type="string" editable="false"></field>
+                                                            <field name="TSKT_BF" type="string" editable="true"></field>
+                                                            <field name="TSKT_AT" type="string" editable="true"></field>
+
+                                                        </fields>
+                                                    </model>
+                                                </schema>
+                                                <aggregates>
+                                                    <aggregate field="TotalSales" aggregate="sum" />
+                                                </aggregates>
+                                                <transport>
+                                                    <read url="@Url.Action("GetThongSoKT","Home")" />
+                                                    @*   <update url="@Url.Action("DetailProducts_Update","Grid")" />
+                                                    <create url="@Url.Action("DetailProducts_Create","Grid")" />
+                                                    <destroy url="@Url.Action("DetailProducts_Destroy","Grid")" />*@
+                                                </transport>
+                                            </datasource>
+                                            <columns>
+                                                @* <column width="75" selectable="true"
+                                                header-html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }'
+                                                html-attributes='new Dictionary<string,object> { ["class"] = "checkbox-align" }' />*@
+                                                <column field="TSKT_DESC" title="Thông số kỹ thuật (Название)" width="120" />
+                                                <column field="TSKT_BF" title="Trước BDSC (до ТО)" width="120" />
+                                                <column field="TSKT_AT" title="Sau BDSC ( после ТО)" width="120" />
+                                                @*      <column field="Category.CategoryName" title="Category" width="125" editor="categoryDropDownEditor"
+                                                group-header-template="Category: #=data.value#, Total Sales: #=kendo.format('{0:c}', data.aggregates.TotalSales.sum)#" />*@
+                                                @* <column field="Country.CountryNameLong" title="Country" width="120"
+                                                template="<div class='k-text-center'><img src='/shared/web/country-flags/#:data.Country.CountryNameShort#.png' alt='#: data.Country.CountryNameLong#' title='#: data.Country.CountryNameLong#' width='30' /></div>"
+                                                editor="clientCountryEditor" />*@
+                                                @*<column field="UnitsInStock" title="Units" width="105" />
+                                                <column field="TotalSales" title="Total Sales" width="140" format="{0:c}" />
+                                                <column field="TargetSales" title="Target Sales" editable="returnFalse" width="140"
+                                                template="<span id='chart_#= ProductID#' class='sparkline-chart'></span>" />*@
+                                            </columns>
+                                            <toolbar>
+
+                                                <toolbar-button name="save" text="Lưu thay đổi"></toolbar-button>
+                                                <toolbar-button name="cancel" text="Hủy bỏ"></toolbar-button>
+                                            </toolbar>
+                                            <editable enabled="true" />
+                                            <sortable enabled="true" />
+                                            <reorderable enabled="true" />
+                                            <scrollable enabled="true" />
+                                        </kendo-grid>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid gray; height: 40px">
+                                        <span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px"><b><u>Ghi chú:</u></b></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid gray; height: 40px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid gray; height: 40px">
+                                        <table>
+                                            <tr>
+                                                <td><span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px">B. Đánh giá tình trạng hoạt động của thiết bị.</span>                                                                </td>
+                                                <td>
+                                                    @*<telerik:RadCheckBox ID="cbDat" runat="server" Text="Đạt" OnCheckedChanged="cbDat_CheckedChanged"></telerik:RadCheckBox>*@
+                                                    <kendo-checkboxgroup name="cbGroupDat" id="cbGroupDat" value='new string[] { Model.TTHDThietBi?"1":"2" }' on-change="cbGroup_change" layout="CheckBoxGroupLayout.Horizontal">
+                                                        <kendo-checkboxgroup-items>
+                                                            <kendo-checkboxgroup-item value="1" label="Đạt"></kendo-checkboxgroup-item>
+                                                            <kendo-checkboxgroup-item value="2" label="Không Đạt"></kendo-checkboxgroup-item>
+                                                        </kendo-checkboxgroup-items>
+                                                    </kendo-checkboxgroup>
+                                                </td>
+                                                <td>
+                                                    @*   <telerik:RadCheckBox ID="cbKoDat" runat="server" Text="Không đạt" OnCheckedChanged="cbKoDat_CheckedChanged"></telerik:RadCheckBox>*@
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span style="font-size: 14pt; font-family: times; margin-left: 15px">(Оценка работоспособности оборудования)</span></td>
+                                                <td>Удовлет</td>
+                                                <td>Не удовлет</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div ID="Radpane7" class="AutoHeight rdSP2">
+                        <span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px"><i>II. Người báo cáo/ghi thông số:(лццо раnopma/заnucu napamempa)</i></span>
+
+                        <table width="100%" style="font-family: times; font-size: 12pt; border: 2px solid gray;table-layout:auto">
+
+                            <tr>
+                                <td style="width: 33%; text-align: center;">Kỹ Sư Vận hành</td>
+
+                                <td style="width: 33%; text-align: center;">Kỹ sư BBDSC</td>
+
+                                <td style="width: 33%; text-align: center;">Trưởng bộ phận</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 33%; text-align: center;">Инженер по эксплуат</td>
+
+                                <td style="width: 33%; text-align: center;">Инженер ППР</td>
+
+                                <td style="width: 33%; text-align: center;">Рук. Службы</td>
+                            </tr>
+                            <tr style="height: 100px"></tr>
+                            <tr>
+                                <td style="width: 33%; text-align: center;">
+
+                                    <kendo-combobox name="cbKSVanHanh" style="width:70%;border:none;text-align:center" id="cbKSVanHanh"
+                                                    datatextfield="per_desc"
+                                                     datavaluefield="per_code"
+                                                    filter="FilterType.Contains" for="KSVanHanh">
+                                        <datasource>
+                                            <transport>
+                                                <read url="@Url.Action("loadDataPreson", "Home")" />
+                                            </transport>
+                                        </datasource>
+                                        <popup-animation>
+                                            <open duration="500" />
+                                            <close duration="500" />
+                                        </popup-animation>
+                                    </kendo-combobox>
+                                </td>
+                                <td style="width: 33%; text-align: center;">
+                                    <kendo-combobox name="cbKSBBDSC"
+                                                    datatextfield="per_desc" datavaluefield="per_code" id="cbKSBBDSC"
+                                                    filter="FilterType.Contains" value="@Model.KSBBDCS" on-select="cbBSSC_select" style="width:70%;text-align:center">
+                                        <datasource>
+                                            <transport>
+                                                <read url="@Url.Action("loadDataPreson", "Home")" />
+                                            </transport>
+                                        </datasource>
+                                    </kendo-combobox>
+                                </td>
+                                <td style="width: 33%; text-align: center;">
+                                    <kendo-combobox name="cbTruongBoPhan" id="cbTruongBoPhan"
+                                                    datatextfield="per_desc"
+                                                     datavaluefield="per_code"
+                                                    filter="FilterType.Contains" value="@Model.TruongBoPhan" on-select="cbTBP_select" style="width:70%;border:none;text-align:center">
+                                        <datasource>
+                                            <transport>
+                                                <read url="@Url.Action("loadDataPreson", "Home")" />
+                                            </transport>
+                                        </datasource>
+                                    </kendo-combobox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 33%; text-align: center;">
+                                    Ngày(Дата):  <kendo-datepicker name="ngayKSVanHanh1"
+                                                                   format="{0:dd/MM/yyyy}"
+                                                                   value='!string.IsNullOrEmpty(Model.NgayKSVH)?DateTime.ParseExact(Model.NgayKSVH,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                   style="width: 150px;text-align:center;">
+                                    </kendo-datepicker>
+                                </td>
+
+                                <td style="width: 33%; text-align: center;">
+                                    Ngày(Дата):<kendo-datepicker name="ngayKSBBDSC1"
+                                                                 format="{0:dd/MM/yyyy}"
+                                                                 on-change="ngayngayKSBBDSC_select"
+                                                                 value='!string.IsNullOrEmpty(Model.NgayKSBBDSC)?DateTime.ParseExact(Model.NgayKSBBDSC,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                 style="width: 150px;text-align:center;">
+                                    </kendo-datepicker>
+                                </td>
+
+                                <td style="width: 33%; text-align: center;">
+                                    Ngày(Дата): <kendo-datepicker name="ngayTruongBoPhan1"
+                                                                  format="{0:dd/MM/yyyy}"
+                                                                  on-change="ngayTruongBoPhan_select"
+                                                                  value='!string.IsNullOrEmpty(Model.NgayTruongBoPhan)?DateTime.ParseExact(Model.NgayTruongBoPhan,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                  style="width: 150px;text-align:center;">
+                                    </kendo-datepicker>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div ID="Radpane10" CssClass="AutoHeight rdSP2" Height="350" runat="server" Width="100%" ShowContentDuringLoad="False" Scrollable="false" Scrolling="None">
+                        <span style="color: black; font-weight: bold; font-size: 14pt; font-family: times; margin-left: 15px"><i>III. Kết quả nghiệm thu công việc BDSC:(Резулъmam npueмкu nocлe TO)</i></span>
+
+
+
+
+                        <table width="100%" style="font-family: times; font-size: 12pt; border: 2px solid gray">
+
+                            <tr>
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;">Lãnh đạo giàn</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;">Рук. объекта</td>
+                            </tr>
+                            <tr style="height: 100px">
+                                <td style="width: 33%; text-align: center;">
+                                    @*  <telerik:RadCheckBox ID="cbHoanThanh" Filter="Contains" runat="server" Text="Hoàn thành" OnCheckedChanged="cbHoanThanh_CheckedChanged"></telerik:RadCheckBox>*@
+                                    <kendo-checkboxgroup name="cbGroupHoanThanh" id="cbGroupHoanThanh"
+                                                         value='new string[] { Model.KQNghiemThu?"1":"2" }' on-change="cbGroup_change" style="width:auto">
+                                        <kendo-checkboxgroup-items>
+                                            <kendo-checkboxgroup-item value="1" label="Hoàn thành "></kendo-checkboxgroup-item>
+                                            <kendo-checkboxgroup-item value="2" label="Không hoàn thành"></kendo-checkboxgroup-item>
+
+                                        </kendo-checkboxgroup-items>
+                                    </kendo-checkboxgroup>
+                                    <br />
+                                    @*  <telerik:RadCheckBox ID="cbKoHoanThanh" runat="server" Text="Không hoàn thành" OnCheckedChanged="cbKoHoanThanh_CheckedChanged"></telerik:RadCheckBox>*@
+                                </td>
+
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;"></td>
+
+                                <td style="width: 33%; text-align: center;">
+                                    @* <telerik:RadComboBox RenderMode="Lightweight" ID="cbLanhDaoGian" OnClientSelectedIndexChanged="cbLanhDaoGian_OnClientSelectedIndexChanged" CssClass="cbLanhDaoGian_firstCombo" runat="server" Width="200"
+                                    MarkFirstMatch="true" EnableLoadOnDemand="true"
+                                    Skin="Office2010Silver">
+                                    </telerik:RadComboBox>*@
+                                    <kendo-combobox name="cbLanhDaoGian" id="cbLanhDaoGian"
+                                                    datatextfield="per_desc"
+                                                     datavaluefield="per_code"
+                                                    filter="FilterType.Contains" value-primitive="true" value="@Model.LanhDaoGian" on-select="cbGian_select" style="width:70%;text-align:center">
+                                        <datasource>
+                                            <transport>
+                                                <read url="@Url.Action("loadDataLanhDaoGian", "Home")" />
+                                            </transport>
+                                        </datasource>
+                                    </kendo-combobox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 33%; text-align: center;"></td>
+                                <td style="width: 33%; text-align: center;"></td>
+                                <td style="width: 33%; text-align: center;">
+                                    Ngày(Дата): <kendo-datepicker name="ngayLanhDaoGian1"
+                                                                  format="{0:dd/MM/yyyy}"
+                                                                  on-change="ngayLanhDaoGian_select"
+                                                                  value='!string.IsNullOrEmpty(Model.NgayLanhDao)?DateTime.ParseExact(Model.NgayLanhDao,"dd/MM/yyyy",System.Globalization.CultureInfo.InvariantCulture):null'
+                                                                  style="width: 150px;text-align:center;">
+                                    </kendo-datepicker>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="centerbtn" id="section03">
+                            <div id="divError" style="display: flex;justify-content: center;text-align: center;align-items: center;">
+                                <ul style="width:max-content;font-size: 14px;color: red;" runat="server" id="liError">
+                                </ul>
+                            </div>
+
+                            <kendo-button name="btnSave"
+                                          tag="span"
+                                          theme-color="ThemeColor.Light" onclick="saveClick('@Model.gian','@Model.bophan','@Model.Org_TBi','@Model.matbi')" style="width:100px;height:40px;font-size:13px">
+                                Cập nhật
+                            </kendo-button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <kendo-dialog name="dialog" title="Thông báo" width="400" modal="false" visible="false">
+        <content>
+            <p>Do you want to delete item ?</p>
+        </content>
+        <actions>
+            <action text="Ok" action="okClick">
+            </action>
+            <action text="Cancel" onclick="cancelClick()">
+            </action>
+
+        </actions>
+        <popup-animation>
+            <open duration="500" effects="fade:in" />
+            <close duration="500" effects="fade:out" />
+        </popup-animation>
+    </kendo-dialog>
+
+    <a href="#section03" id="section"><span id="scrolldown"></span></a>
+    <asp:HiddenField ID="hdIdRow" runat="server" />
+    <div id="toasts"></div>
+    <kendo-window name="winPart"
+                  title="Vật tư, phụ tùng (запчасти)"
+                  draggable="true"
+                  resizable="true"
+                  width="600"
+                  id="winPart" on-close="onClose" visible="false">
+        <popup-animation enabled="false" />
+    </kendo-window>
+</div>
+<script>
+    function trangthaiTemplateEdit(container, options) {
+
+        $('<input name="trangthai">')
+            .appendTo(container)
+            .kendoComboBox({
+                autoBind: false,
+                dataTextField: "Value",
+                dataValueField: "Key",
+                change: function (e) {
+                    var ddl = this;
+
+                    var text = ddl.dataItem().Value;
+                    var ID = ddl.dataItem().ID;
+                    var grid = $('#grdData').data('kendoGrid');
+                    var model = grid.editable.options.model;
+
+                    model.set("trangthai", text);
+                },
+                dataSource: {
+                    transport: {
+                        read: '@Url.Action("GetTrangThais","Home")'
+                    }
+                }
+            }).data("kendoComboBox").value(options.model.trangthai);
+    }
+    function partTemplate(container, options) {
+        var iconTemplate = '<button  onclick="openPart()"><span class="k-icon k-i-search"></span></button';
+        $('<input name="par_code">')
+            .appendTo(container)
+            .kendoTextBox({
+                change: function (e) {
+                    $.ajax({
+                        url: `/Home/SelectPart?part=${e.value}`,
+                        type: 'POST',
+
+                        data: e.value,
+                        success: function (data) {
+                            var grid = $('#grdPart').data('kendoGrid');
+                            var model = grid.dataSource.at(0);
+                            model.set("sto_store", data.storecode);
+                            model.set("par_desc", data.txtpartdesc);
+                            model.set("par_longdescription", data.txtpartlongdesc);
+                        }
+                    });
+                }
+                //autoBind: false,
+                //dataTextField: "partCode",
+
+                //change: function (e) {
+                //    var ddl = this;
+
+                //    var text = ddl.dataItem().partCode;
+                //    var grid = $('#grdPart').data('kendoGrid');
+                //    var model = grid.editable.options.model;
+                //    model.set("par_code", text);
+                //    $.ajax({
+                //        url: `/Home/SelectPart?part=${text}`,
+                //        type: 'POST',
+
+                //        data: text,
+                //        success: function (data) {
+                //            model.set("sto_store", data.storecode);
+                //            model.set("par_desc", data.txtpartdesc);
+                //            model.set("par_longdescription", data.txtpartlongdesc);
+                //        }
+                //    });
+
+
+
+
+
+
+                // },
+                //    click: function (e) {
+
+
+                //        // Code to handle the click event when the drop-down is opened
+                //        openPart();
+                //    },
+                //    dataSource: {
+                //    transport: {
+                //        read: '@Url.Action("GetPartList","Home")'
+                //    }
+                //}
+            });
+        container.append(iconTemplate);
+        container.find(".k-i-search").css("cursor", "pointer").css("width", "20px").css("height", "20px");
+        container.find(".k-input").css("width", "80%");
+
+    }
+    function storeTemplate(container, options) {
+        var par_code = options.model.par_code;
+        $('<input name="sto_store">')
+            .appendTo(container)
+            .kendoComboBox({
+                autoBind: false,
+                dataSource: {
+                    transport: {
+                      
+                        read: '@Url.Action("getStoreList","Home",new {par_code = "__par_code__"})'.replace("__par_code__", par_code)
+                    }
+                }
+            });
+    }
+    function openPart() {
+        var windowMSR = $("#winPart").data("kendoWindow");
+        windowMSR.setOptions({
+
+            height: 500,
+            width: 850
+        });
+        windowMSR.refresh({
+            url: "LoadPart/Index",
+            iframe: true,
+        });
+        windowMSR.center();
+        windowMSR.open();
+    }
+    function grddata_SaveChange(e) {
+
+        //var dataSource = e.sender.dataSource;
+        //var editedColumns = [];
+
+        //dataSource.data().forEach(function (item) {
+        //    if (item.dirty) {
+        //        editedColumns.push(item);
+        //    }
+        //});
+
+        //console.log("Edited Columns: ", editedColumns);
+        //var dataSource = e.sender.dataSource;
+        //var editedColumns = [];
+
+        //dataSource.data().forEach(function (item) {
+        //    if (item.dirty) {
+        //        console.log(item);
+        //        for (var field in item.dirtyFields) {
+        //            if (item.dirtyFields.hasOwnProperty(field)) {
+        //                // Field has been modified
+        //                editedColumns.push(field);
+        //            }
+        //        }
+        //    }
+        //});
+
+        //console.log("Edited Columns: ", editedColumns);
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+
+        lsObj.forEach(function (obj) {
+
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+        console.log(json);
+        $.ajax({
+            url: `/Home/SaveChangeData`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdData").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+    function onClose(e) {
+        $.ajax({
+            url: `/Home/getPartSelect`,
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (data) {
+                var grid = $('#grdPart').data('kendoGrid');
+                var dataItem = grid.dataSource.at(0);
+
+                dataItem.set("par_code", data.par_code);
+                dataItem.set("sto_store", data.sto_store);
+                dataItem.set("par_desc", data.par_desc);
+                dataItem.set("par_longdescription", data.par_longdescription);
+
+            }
+        });
+    }
+
+    function DeleteItem(Id) {
+        var idRow = document.getElementById("hdIdRow");
+
+        idRow.value = Id;
+
+        var notification = $("#dialog").data("kendoDialog");
+        notification.open();
+        //var st = prompt("Do you want to delete item? Please Enter 'OK' to delete item");
+        //if (st == "OK") {
+        //    $.ajax({
+        //        url: `/Home/DeleteItemData?idRow=${Id}`,
+        //        cache: false,
+        //        type: 'POST',
+        //        data: {
+        //            idRow: Id,
+        //        },
+        //        success: function (data) {
+        //            var grid = $("#grdData").data("kendoGrid");
+        //            grid.dataSource.read();
+        //        }
+        //    });
+        //}
+    }
+    function okClick() {
+        var idRow = document.getElementById("hdIdRow").value;
+
+        $.ajax({
+            url: `/Home/DeleteItemData?idRow=${idRow}`,
+            cache: false,
+            type: 'POST',
+            data: {
+                idRow: idRow,
+            },
+            success: function (data) {
+                var grid = $("#grdData").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+
+    }
+    function DeleteTemplate(Id) {
+        if (Id) {
+            return kendo.format("<div style='width:100%;text-align:center'><a href='javascript:DeleteItem({0})'><img src='/images/delete.png'/></a></div>", Id);
+        }
+        return "";
+    }
+    function grdPart_SaveChange(e) {
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+
+        lsObj.forEach(function (obj) {
+            obj.mlp_qty = obj.mlp_qty.toString();
+            obj.calculated_column = obj.calculated_column.toString();
+            if (obj.dirty) {
+                if (obj.idRow === 0 || obj.status === 1) {
+
+                    obj.status = 1;
+                } else {
+                    obj.status = 2;
+                }
+            }
+        });
+        var json = JSON.stringify(lsObj);
+        $.ajax({
+            url: `/Home/SaveChangePart`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#grdPart").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+    function grdPart_edit(e) {
+        var dataItem = e.model;
+        console.log(e);
+        if (dataItem) {
+
+            var editorPart = e.container.find("[name=par_code]");
+            var search = e.container.find(".k-i-search");
+            var editorStore = e.container.find("[name=sto_store]").data("kendoComboBox");
+            var parDesc = e.container.find("[name=par_desc]");
+            var parLongDesc = e.container.find("[name=par_longdescription]");
+            console.log(search);
+            if (search) {
+                if (e.model.isNew()) {
+
+
+
+                }
+                else {
+
+                    search.hide();
+
+                }
+            }
+            if (editorPart) {
+                //if (e.model.isNew()) {
+                //    if (!editorPart.open()) {
+                //        editorPart.enable(true);
+                //        editorPart.open();
+                //    }
+                //} else {
+                //    if (!editorPart.close()) {
+                //        editorPart.enable(false);
+                //        editorPart.close();
+                //    }
+
+                //}
+                if (e.model.isNew()) {
+
+                    editorPart.attr("disabled", false);
+
+                }
+                else {
+
+                    editorPart.attr("disabled", true);
+
+                }
+
+            }
+            if (editorStore) {
+                if (!editorStore.open()) {
+                    editorStore.enable(true);
+                    editorStore.open();
+                }
+              
+
+            }
+
+            if (parDesc) {
+                if (e.model.isNew()) {
+
+                    parDesc.attr("disabled", false);
+
+                }
+                else {
+
+                    parDesc.attr("disabled", true);
+
+                }
+
+            }
+            if (parLongDesc) {
+                if (e.model.isNew()) {
+                    parLongDesc.attr("disabled", false);
+                } else {
+                    parLongDesc.attr("disabled", true);
+                }
+
+            }
+        }
+    }
+    function grdThongSo_SaveChange(e) {
+        var data = e.sender.dataSource.data();
+
+        var lsObj = [];
+        for (var i = 0; i < data.length; i++) {
+            lsObj.push(data[i]);
+        }
+        var json = JSON.stringify(lsObj);
+        $.ajax({
+            url: `/Home/SaveChangeThongSo`,
+            type: 'POST',
+            contentType: 'application/json',
+            data: json,
+            success: function (data) {
+                var grid = $("#gridThongSo").data("kendoGrid");
+                grid.dataSource.read();
+            }
+        });
+    }
+
+    function formatDate(date) {
+        if (date) {
+            var jsDate = date instanceof Date ? date : kendo.parseDate(date);
+
+            if (jsDate instanceof Date && !isNaN(jsDate)) {
+                var day = jsDate.getDate();
+                var month = jsDate.getMonth() + 1;
+                var year = jsDate.getFullYear();
+
+                var formattedDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year;
+
+                return formattedDate;
+            }
+        }
+
+        return "";
+    }
+
+    function saveClick(gian, bophan, org_tbi, matb) {
+        var cbKSBBDSC = $("#cbKSBBDSC").data("kendoComboBox");
+        var cbLanhDaoGian = $("#cbLanhDaoGian").data("kendoComboBox");
+        var cbKSVanHanh = $("#cbKSVanHanh").data("kendoComboBox");
+        var cbTruongBoPhan = $("#cbTruongBoPhan").data("kendoComboBox");
+        var cbDat = $("#cbGroupDat").data("kendoCheckBoxGroup");
+        var cbHoanThanh = $("#cbGroupHoanThanh").data("kendoCheckBoxGroup");
+        var checkDat = cbDat.value()[0] == "1" ? true : false;
+        var checkHoanThanh = cbHoanThanh.value()[0] == "1" ? true : false;
+        var cbKSBBDSC = cbKSBBDSC.value();
+        var cbLanhDaoGian = cbLanhDaoGian.value();
+        var cbTruongBoPhan = cbTruongBoPhan.value();
+        var cbKSVanHanh = cbKSVanHanh.value();
+        var ngayLanhDaoGian = formatDate($("#ngayLanhDaoGian1").data("kendoDatePicker").value());
+        var ngayTruongBoPhan = formatDate($("#ngayTruongBoPhan1").data("kendoDatePicker").value());
+        var ngayKSBBDSC = formatDate($("#ngayKSBBDSC1").data("kendoDatePicker").value());
+        var ngayKSVanHanh = formatDate($("#ngayKSVanHanh1").data("kendoDatePicker").value());
+
+
+
+        $.ajax({
+            type: "POST",
+            url: `/Home/saveClick?gian=${gian}&bophan=${bophan}&org_tbi=${org_tbi}&matb=${matb}&checkDat=${checkDat}&checkHoanThanh=${checkHoanThanh}&cbKSBBDSC=${cbKSBBDSC}&cbLanhDaoGian=${cbLanhDaoGian}&cbTruongBoPhan=${cbTruongBoPhan}&cbKSVanHanh=${cbKSVanHanh}&ngayLanhDaoGian=${ngayLanhDaoGian}&ngayTruongBoPhan=${ngayTruongBoPhan}&ngayKSBBDSC=${ngayKSBBDSC}&ngayKSVanHanh=${ngayKSVanHanh}`,
+            // Don't use JSON.stringify here
+            contentType: "application/json; charset=utf-8",
+
+            success: function (response) {
+
+                if (response != "" && response != null) {
+                    //showToast(response, '/images/error-48.png', 'Thất bại');
+                    showToast('Cập nhật thành công!', '/images/complete-48.png', 'Thành công');
+                    console.log(response);
+                } else {
+                    showToast('Cập nhật thành công!', '/images/complete-48.png', 'Thành công');
+                }
+                window.location.reload();
+
+                showToast('Cập nhật thành công!', '/Images/complete-48.png', 'Thành công');
+
+            },
+            error: function (error) {
+
+                window.location.reload();
+                showToast('Cập nhật thất bại!', '/images/error-48.png', 'Thất bại');
+            }
+        });
+
+    }
+    function cbGroup_change(e) {
+        e.sender.value([$(e.target[0]).val()]);
+    }
+    function cbTBP_select(e) {
+        if (e.item) {
+
+            var cbTBP = $("#cbTruongBoPhan").data("kendoComboBox");
+            var cbTBP2 = $("#cbTruongBoPhan_2").data("kendoComboBox");
+
+            cbTBP.text(e.item[0].innerText);
+            cbTBP2.text(e.item[0].innerText);
+
+        } else {
+            console.log("event :: select");
+        }
+    }
+
+    function cbGian_select(e) {
+        if (e.item) {
+            var dataItem = this.dataItem(e.item.index());
+            var cbGian = $("#cbLanhDaoGian").data("kendoComboBox");
+            var cbGian2 = $("#cbLanhDaoGian_2").data("kendoComboBox");
+
+            cbGian.text(e.item[0].innerText);
+            cbGian2.text(e.item[0].innerText);
+
+        } else {
+            console.log("event :: select");
+        }
+    }
+
+    function cbBSSC_select(e) {
+        if (e.item) {
+            var dataItem = this.dataItem(e.item.index());
+            var cbKSBBDSC = $("#cbKSBBDSC").data("kendoComboBox");
+            var cbKSBBDSC2 = $("#cbKSBBDSC_2").data("kendoComboBox");
+
+            cbKSBBDSC.text(e.item[0].innerText);
+            cbKSBBDSC2.text(e.item[0].innerText)
+
+        } else {
+            console.log("event :: select");
+        }
+    }
+
+    function ngayLanhDaoGian_select(e) {
+        var dataItem = this.value();
+        var cbKSBBDSC = $("#ngayLanhDaoGian").data("kendoDatePicker");
+        var cbKSBBDSC2 = $("#ngayLanhDaoGian1").data("kendoDatePicker");
+
+        cbKSBBDSC.value(dataItem);
+        cbKSBBDSC2.value(dataItem)
+    }
+
+    function ngayTruongBoPhan_select(e) {
+        var dataItem = this.value();
+        var cbKSBBDSC = $("#ngayTruongBoPhan").data("kendoDatePicker");
+        var cbKSBBDSC2 = $("#ngayTruongBoPhan1").data("kendoDatePicker");
+
+        cbKSBBDSC.value(dataItem);
+        cbKSBBDSC2.value(dataItem)
+    }
+
+    function ngayngayKSBBDSC_select(e) {
+        var dataItem = this.value();
+        var cbKSBBDSC = $("#ngayKSBBDSC").data("kendoDatePicker");
+        var cbKSBBDSC2 = $("#ngayKSBBDSC1").data("kendoDatePicker");
+
+        cbKSBBDSC.value(dataItem);
+        cbKSBBDSC2.value(dataItem)
+    }
+
+    function toast({ title = "", message = "", img = "", duration = 1000 }) {
+        const main = document.getElementById("toasts");
+        if (main) {
+            const toast = document.createElement("div");
+
+            // Auto remove toast
+            const autoRemoveId = setTimeout(function () {
+                main.removeChild(toast);
+            }, duration + 1000);
+
+            // Remove toast when clicked
+            toast.onclick = function (e) {
+                if (e.target.closest(".toast__close")) {
+                    main.removeChild(toast);
+                    clearTimeout(autoRemoveId);
+                }
+            };
+            const delay = (duration / 1000).toFixed(2);
+
+            toast.classList.add("toasts");
+            toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s ${delay}s forwards`;
+
+            toast.innerHTML = `
+                                                                                                                                                                                                                                                <div class="notifications-item" style="border-bottom:0px;">
+                                                                                                                                                                                                                                                                                                                                                                <img src="${img}" alt="img"/>
+                                                                                                                                                                                                                                                                                                                                                             <div class="text">
+                                                                                                                                                                                                                                                                                                                                                                    <div style="width:100%;"><h4 style="width:auto">${title}</h4></div>
+                                                                                                                                                                                                                                                                                                                                                                    <p style="font-size:13px">${message}</p>
+                                                                                                                                                                                                                                                                                                                                                             </div>
+                                                                                                                                                                                                                                                                                                                                                             <span class="toast__close" style="float:right;margin-left:30px;margin-top:15px"> <img src="/Images/delete.png" style="width:16px;height:16px" /></span>
+                                                                                                                                                                                                                                                                                                                                                         </div>
+                                                                                                                                                                                                                                                                                                                                                              `;
+            main.appendChild(toast);
+        }
+    }
+    function showToast(toastNotification, img, title) {
+        toast({
+            title: title,
+            message: toastNotification,
+            img: img,
+            duration: 1000 * 10
+        });
+    }
+    $(document).ready(function () {
+        $('#section').on('click', function (e) {
+            e.preventDefault();
+            $('#content').animate({ scrollTop: $('#content')[0].scrollHeight }, 500, 'linear');
+        });
+    });
+    $(function () {
+        $("[data-role=combobox]").each(function () {
+            var widget = $(this).getKendoComboBox();
+            widget.input.on("focus", function () {
+                widget.open();
+            });
+        });
+    });
+    function grdData_edit(e) {
+
+        var dataItem = e.model;
+
+        if (dataItem) {
+
+            var editorPart = e.container.find("[name=trangthai]").data("kendoComboBox");
+
+
+            if (editorPart) {
+
+
+                if (!editorPart.open()) {
+                    editorPart.open();
+
+                }
+            }
+
+        }
+    }
+    function convertToLocalTime(dateString) {
+    var date = new Date(dateString);
+    var localDate = new Date(date.toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"}));
+    return localDate;
+}
+
+</script>
